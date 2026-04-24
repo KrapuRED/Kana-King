@@ -18,18 +18,6 @@ public class Player : MonoBehaviour, IEntity
 
     public void TakeDamage(float damage)
     {
-        currentHealth -= damage;
 
-        if (currentHealth <= 0)
-        {
-            currentHealth = 0;
-            Die();
-        }
-
-    }
-
-    private void Die()
-    {
-        Debug.Log("Player mati");
     }
 }
