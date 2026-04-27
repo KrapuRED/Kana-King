@@ -1,19 +1,17 @@
 using UnityEngine;
 
-public class Player : MonoBehaviour, IEntity
+public class Player : MonoBehaviour, IDamageable
 {
     [Header("Stats")]
-    [SerializeField] private float _maxHealth = 100f;
-    [SerializeField] private float _damage = 10f;
-
-    [Header("Health")]
+    [SerializeField] private float maxHealth = 100f;
     [SerializeField] private float currentHealth;
-    public float maxHealth => _maxHealth;
-    public float damage => _damage;
+    [SerializeField] private float damage = 10f;
+    public float CurrentHealth => currentHealth;
+    public float Damage => damage;
 
-    private void Start()
+    private void Awake()
     {
-        currentHealth = _maxHealth;
+        currentHealth = maxHealth;
     }
 
     public void TakeDamage(float damage)
