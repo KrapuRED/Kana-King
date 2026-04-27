@@ -7,7 +7,9 @@ public enum ItemCategory
     Defense,
     Artifact,
     Weapon,
-    Skill
+    Skill,
+    Exp,
+    Gold
 }
 
 

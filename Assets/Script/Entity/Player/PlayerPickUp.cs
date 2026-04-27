@@ -3,6 +3,8 @@ using UnityEngine;
 public class PlayerPickUp : MonoBehaviour
 {
     [SerializeField] private float distancePickup;
+
+    [SerializeField] private LayerMask pickupLayer;
     void Start()
     {
         
@@ -11,13 +13,18 @@ public class PlayerPickUp : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Collider2D hit = Physics2D.OverlapCircle(transform.position, distancePickup);
-        if (hit != null)
+        Collider2D[] hits = Physics2D.OverlapCircleAll(
+            transform.position,
+            distancePickup,
+            pickupLayer
+        );
+
+        foreach (var hit in hits)
         {
             IPickUp pickup = hit.GetComponent<IPickUp>();
-            if(pickup != null)
+            if (pickup != null)
             {
-                pickup.Do();
+                pickup.InRange();
             }
         }
     }

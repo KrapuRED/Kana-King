@@ -6,7 +6,6 @@ public class ItemScript : MonoBehaviour, IPickUp
 {
     [SerializeField] private ItemSO itemSO;
     private SpriteRenderer spriteRenderer;
-    private bool comeToPlayer = false;
     [SerializeField] private bool _inRange = false;
     [SerializeField] private float speed = 10f;
     public bool inRange => _inRange;
@@ -37,8 +36,16 @@ public class ItemScript : MonoBehaviour, IPickUp
         spriteRenderer.sprite = itemSO.itemImage;
     }
 
-    public void Do()
+    public void InRange()
     {
         _inRange = true;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            Debug.Log("hi");
+        }
     }
 }
