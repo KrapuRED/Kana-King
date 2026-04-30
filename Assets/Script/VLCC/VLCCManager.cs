@@ -17,7 +17,9 @@ public class VLCCManager : MonoBehaviour
 
     [SerializeField] private float duration = 5f;
 
+
     [SerializeField] private DataVLCC dataVLCC;
+    [SerializeField] private VLCCUi vlccUI;
 
     private void Update()
     {
@@ -38,7 +40,25 @@ public class VLCCManager : MonoBehaviour
     public void SetUpVLCC(string name)
     {
         dataVLCC = DatabaseVLCC.instance.FindData(name);
+        SetUpKatakana();
+        SetUpRomanji();
     }
 
-
+    public void SetUpKatakana()
+    {
+        vlccUI = VLCCUi.instance;
+        foreach (char x in dataVLCC.katakana)
+        {
+            vlccUI.SpawnKatakana(x);
+        }
+    }
+    public void SetUpRomanji()
+    {
+        vlccUI = VLCCUi.instance;
+        string[] parts = dataVLCC.romaji.Split(' ');
+        foreach (string part in parts)
+        {
+            vlccUI.SpawnRomaji(part);
+        }
+    }
 }
