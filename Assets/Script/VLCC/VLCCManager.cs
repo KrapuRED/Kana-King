@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using System.Collections.Generic;
 
 public class VLCCManager : MonoBehaviour
 {
@@ -21,6 +22,8 @@ public class VLCCManager : MonoBehaviour
     [SerializeField] private DataVLCC dataVLCC;
     [SerializeField] private VLCCUi vlccUI;
 
+    public List<string> romajiOrder;
+
     private void Update()
     {
         if (duration > 0)
@@ -41,7 +44,7 @@ public class VLCCManager : MonoBehaviour
     {
         dataVLCC = DatabaseVLCC.instance.FindData(name);
         SetUpKatakana();
-        SetUpRomanji();
+        SetUpRomaji();
     }
 
     public void SetUpKatakana()
@@ -52,12 +55,13 @@ public class VLCCManager : MonoBehaviour
             vlccUI.SpawnKatakana(x);
         }
     }
-    public void SetUpRomanji()
+    public void SetUpRomaji()
     {
         vlccUI = VLCCUi.instance;
         string[] parts = dataVLCC.romaji.Split(' ');
         foreach (string part in parts)
         {
+            romajiOrder.Add(part);
             vlccUI.SpawnRomaji(part);
         }
     }

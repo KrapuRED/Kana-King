@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using System.Collections.Generic;
 
 public class VLCCUi : MonoBehaviour
 {
@@ -22,8 +23,10 @@ public class VLCCUi : MonoBehaviour
     [SerializeField] private Transform katakanaSpawner;
 
     [Header("Romanji")]
-    [SerializeField] private GameObject romajiPrefab;
-    [SerializeField] private Transform romajiSpawner;
+    [SerializeField] private GameObject romajiTextPrefab;
+    [SerializeField] private List<GameObject> romajiList;
+    [SerializeField] private RomajiSpawner romajiSpawner;
+    //[SerializeField] private Transform romajiSpawner;
 
     private void Start()
     {
@@ -46,7 +49,9 @@ public class VLCCUi : MonoBehaviour
     public void SpawnRomaji(string x)
     {
         Debug.Log("romaji");
-        GameObject obj = Instantiate(romajiPrefab, romajiSpawner);
+        int index = romajiSpawner.RandomizeRomajiSpawn();
+        GameObject obj = Instantiate(romajiTextPrefab, romajiList[index].transform);
+
         obj.GetComponent<RomajiPrefabScript>().SetUp(x);
     }
 
