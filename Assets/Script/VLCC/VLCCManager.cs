@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
+using System.Collections;
 
 public class VLCCManager : MonoBehaviour
 {
@@ -24,6 +25,8 @@ public class VLCCManager : MonoBehaviour
 
     public List<string> romajiOrder;
 
+    public bool onVLCC = false;
+
     private void Update()
     {
         if (duration > 0)
@@ -42,9 +45,14 @@ public class VLCCManager : MonoBehaviour
 
     public void SetUpVLCC(string name)
     {
-        dataVLCC = DatabaseVLCC.instance.FindData(name);
-        SetUpKatakana();
-        SetUpRomaji();
+        if(onVLCC == false)
+        {
+            onVLCC = true;
+            VLCCUi.instance.SetUpVLCCPanel();
+            dataVLCC = DatabaseVLCC.instance.FindData(name);
+            SetUpKatakana();
+            SetUpRomaji();
+        }
     }
 
     public void SetUpKatakana()
@@ -65,23 +73,40 @@ public class VLCCManager : MonoBehaviour
             vlccUI.SpawnRomaji(part);
         }
     }
-    public void CheckRomajiOrder(string x)
-    {
-        if (romajiOrder == null || romajiOrder.Count == 0)
-        {
-            Debug.LogWarning("romajiOrder kosong!");
-            return;
-        }
 
+    public bool CheckRomajiOrder(string x)
+    {
         if (x == romajiOrder[0])
         {
             Debug.Log("correct");
             VLCCUi.instance.SpawnRomajiAnswer(x);
             romajiOrder.RemoveAt(0);
+            return true;
         }
         else
         {
             Debug.Log("salah");
+            return false;
         }
+    }
+
+    public void CheckVLCC()
+    {
+        if (romajiOrder == null || romajiOrder.Count == 0)
+        {
+            StartCoroutine(ResetVLCC());
+        }
+
+    }
+
+    public IEnumerator ResetVLCC()
+    {
+        yield return new WaitForSeconds(3f);
+        Debug.Log("Hello");
+        dataVLCC = null;
+        VLCCUi.instance.SetUpVLCCPanel();
+        romajiOrder.Clear();
+        onVLCC = false;
+        VLCCUi.instance.DeleteAll();
     }
 }

@@ -15,6 +15,8 @@ public class VLCCUi : MonoBehaviour
             Destroy(gameObject);
     }
 
+    [SerializeField] private GameObject VLCCPanel;
+
     [SerializeField] private TMP_Text countDown;
     [SerializeField] private VLCCManager vlccManager;
 
@@ -43,12 +45,19 @@ public class VLCCUi : MonoBehaviour
             UpdateCountDown();
     }
 
+    public void SetUpVLCCPanel()
+    {
+        VLCCPanel.SetActive(!VLCCPanel.activeSelf);
+    }
+
     public void SpawnKatakana(char x)
     {
         Debug.Log("katakana");
         GameObject obj = Instantiate(katakanaPrefab, katakanaSpawner);
         obj.GetComponent<KatakanaPrefabScript>().SetUp(x);
     }
+
+
 
     public void SpawnRomaji(string x)
     {
@@ -64,6 +73,39 @@ public class VLCCUi : MonoBehaviour
         GameObject obj = Instantiate(romajiAnswerPrefab, romajiAnswerSpawner);
         obj.GetComponent<RomajiAnswerScript>().SetUp(x);
     }
+
+
+
+    public void DeleteAll()
+    {
+        // Katakana
+        for (int i = katakanaSpawner.childCount - 1; i >= 0; i--)
+        {
+            Destroy(katakanaSpawner.GetChild(i).gameObject);
+        }
+
+        // Romaji
+        if (romajiList != null)
+        {
+            foreach (GameObject obj in romajiList)
+            {
+                if (obj == null) continue;
+
+                for (int i = obj.transform.childCount - 1; i >= 0; i--)
+                {
+                    Destroy(obj.transform.GetChild(i).gameObject);
+                }
+            }
+        }
+
+        // Answer
+        for (int i = romajiAnswerSpawner.childCount - 1; i >= 0; i--)
+        {
+            Destroy(romajiAnswerSpawner.GetChild(i).gameObject);
+        }
+    }
+
+
 
     public void UpdateCountDown()
     {

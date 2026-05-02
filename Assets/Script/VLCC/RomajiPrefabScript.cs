@@ -1,5 +1,6 @@
-using UnityEngine;
+using DG.Tweening;
 using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 public class RomajiPrefabScript : MonoBehaviour
 {
@@ -11,11 +12,22 @@ public class RomajiPrefabScript : MonoBehaviour
     {
         romaji = x;
         text.text = x.ToString();
+        text.alpha = 0f;
+        transform.localScale = Vector3.zero;
+
+        Sequence seq = DOTween.Sequence();
+        seq.Append(text.DOFade(1f, 0.6f));
+        seq.Join(transform.DOScale(1f, 1f).SetEase(Ease.OutBack));
         buttonRomaji.onClick.AddListener(OnClick);
     }
 
     public void OnClick()
     {
-        VLCCManager.instance.CheckRomajiOrder(romaji);
+        if (VLCCManager.instance.CheckRomajiOrder(romaji))
+        {
+            VLCCManager.instance.CheckVLCC();
+            Destroy(gameObject);
+            
+        }
     }
 }
