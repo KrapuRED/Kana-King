@@ -22,11 +22,15 @@ public class VLCCUi : MonoBehaviour
     [SerializeField] private GameObject katakanaPrefab;
     [SerializeField] private Transform katakanaSpawner;
 
+
     [Header("Romanji")]
     [SerializeField] private GameObject romajiTextPrefab;
     [SerializeField] private List<GameObject> romajiList;
     [SerializeField] private RomajiSpawner romajiSpawner;
-    //[SerializeField] private Transform romajiSpawner;
+
+    [Header("Answer")]
+    [SerializeField] private Transform romajiAnswerSpawner;
+    [SerializeField] private GameObject romajiAnswerPrefab;
 
     private void Start()
     {
@@ -53,6 +57,12 @@ public class VLCCUi : MonoBehaviour
         GameObject obj = Instantiate(romajiTextPrefab, romajiList[index].transform);
 
         obj.GetComponent<RomajiPrefabScript>().SetUp(x);
+    }
+    public void SpawnRomajiAnswer(string x)
+    {
+        Debug.Log("Romaji Answer");
+        GameObject obj = Instantiate(romajiAnswerPrefab, romajiAnswerSpawner);
+        obj.GetComponent<RomajiAnswerScript>().SetUp(x);
     }
 
     public void UpdateCountDown()

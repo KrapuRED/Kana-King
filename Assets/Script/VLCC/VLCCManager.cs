@@ -65,4 +65,23 @@ public class VLCCManager : MonoBehaviour
             vlccUI.SpawnRomaji(part);
         }
     }
+    public void CheckRomajiOrder(string x)
+    {
+        if (romajiOrder == null || romajiOrder.Count == 0)
+        {
+            Debug.LogWarning("romajiOrder kosong!");
+            return;
+        }
+
+        if (x == romajiOrder[0])
+        {
+            Debug.Log("correct");
+            VLCCUi.instance.SpawnRomajiAnswer(x);
+            romajiOrder.RemoveAt(0);
+        }
+        else
+        {
+            Debug.Log("salah");
+        }
+    }
 }
