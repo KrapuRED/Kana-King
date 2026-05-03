@@ -19,7 +19,6 @@ public class VLCCManager : MonoBehaviour
 
     [SerializeField] private float duration = 5f;
 
-
     [SerializeField] private DataVLCC dataVLCC;
     [SerializeField] private VLCCUi vlccUI;
 
@@ -29,8 +28,19 @@ public class VLCCManager : MonoBehaviour
 
     private void Update()
     {
-        if (duration > 0)
-            duration -= Time.deltaTime;
+        if (onVLCC)
+        {
+            if (duration > 0)
+            {
+                duration -= Time.deltaTime;
+            }
+            else if (onVLCC && duration <= 0)
+            {
+                onVLCC = false;
+                VLCCFailed();
+            }
+        }
+
     }
 
     public float GetDuration()
@@ -39,20 +49,20 @@ public class VLCCManager : MonoBehaviour
     }
     public void SetDuration(float x, string name)
     {
-        SetUpVLCC(name);
-        duration = x;
+        if (!onVLCC)
+        {
+            SetUpVLCC(name);
+            duration = x;
+        }
     }
 
     public void SetUpVLCC(string name)
     {
-        if(onVLCC == false)
-        {
-            onVLCC = true;
-            VLCCUi.instance.SetUpVLCCPanel();
-            dataVLCC = DatabaseVLCC.instance.FindData(name);
-            SetUpKatakana();
-            SetUpRomaji();
-        }
+        onVLCC = true;
+        VLCCUi.instance.SetUpVLCCPanel();
+        dataVLCC = DatabaseVLCC.instance.FindData(name);
+        SetUpKatakana();
+        SetUpRomaji();
     }
 
     public void SetUpKatakana()
@@ -76,6 +86,11 @@ public class VLCCManager : MonoBehaviour
 
     public bool CheckRomajiOrder(string x)
     {
+        if (!onVLCC)
+        {
+            return false;
+        }
+
         if (x == romajiOrder[0])
         {
             Debug.Log("correct");
@@ -94,19 +109,33 @@ public class VLCCManager : MonoBehaviour
     {
         if (romajiOrder == null || romajiOrder.Count == 0)
         {
-            StartCoroutine(ResetVLCC());
+            VLCCComplete();
         }
 
     }
 
     public IEnumerator ResetVLCC()
     {
-        yield return new WaitForSeconds(3f);
+        onVLCC = false;
+        yield return new WaitForSeconds(2f);
         Debug.Log("Hello");
         dataVLCC = null;
         VLCCUi.instance.SetUpVLCCPanel();
         romajiOrder.Clear();
-        onVLCC = false;
         VLCCUi.instance.DeleteAll();
+    }
+
+
+    public void VLCCFailed()
+    {
+        Debug.Log("Gagal");
+        for(int i = 0; i < romajiOrder.Count; i++)
+            VLCCUi.instance.SpawnRomajiAnswer(romajiOrder[i]);
+        StartCoroutine(ResetVLCC());
+    }
+    public void VLCCComplete()
+    {
+        Debug.Log("Berhasil");
+        StartCoroutine(ResetVLCC());
     }
 }
