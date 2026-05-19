@@ -2,36 +2,46 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour, IDamageable
 {
-    [Header("Stats")]
-    [SerializeField] private float maxHealth = 100f;
-    [SerializeField] private float currentHealth;
-    [SerializeField] private float damage = 10f;
+    [Header("Enemy Data")]
+    [SerializeField] private EnemySO enemyData;
+
+    private float currentHealth;
 
     public float CurrentHealth => currentHealth;
-    public float Damage => damage;
-    
+    public float Damage => enemyData.damage;
+
     private void Awake()
     {
-        currentHealth = maxHealth;
+        currentHealth = enemyData.maxHealth;
+
+        SpriteRenderer sr = GetComponent<SpriteRenderer>();
+
+        if (sr != null)
+        {
+            sr.sprite = enemyData.enemySprite;
+        }
     }
 
     public void TakeDamage(float damage)
     {
         currentHealth -= damage;
-        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+        currentHealth = Mathf.Clamp(currentHealth, 0, enemyData.maxHealth);
 
         if (currentHealth <= 0)
         {
             Die();
         }
-
     }
 
-    private void Die() 
+    private void Die()
     {
-        Debug.Log("Enemy Die");
+        Debug.Log(enemyData.enemyName + " Die");
+
         Destroy(gameObject);
     }
-    
 
+    public EnemySO GetEnemyData()
+    {
+        return enemyData;
+    }
 }
