@@ -230,16 +230,39 @@ MonoBehaviour:
   stats:
   - statType: 0
     baseValue: 0
+    flatBonus: 0
+    percentBonus: 0
+    totalValue: 0
   - statType: 1
     baseValue: 0
+    flatBonus: 0
+    percentBonus: 0
+    totalValue: 0
   - statType: 2
     baseValue: 0
+    flatBonus: 0
+    percentBonus: 0
+    totalValue: 0
   - statType: 3
     baseValue: 0
+    flatBonus: 0
+    percentBonus: 0
+    totalValue: 0
   - statType: 4
     baseValue: 0
+    flatBonus: 0
+    percentBonus: 0
+    totalValue: 0
   - statType: 5
     baseValue: 0
+    flatBonus: 0
+    percentBonus: 0
+    totalValue: 0
+  baseStatDatas:
+  - statType: 0
+    baseValue: 1
+  - statType: 1
+    baseValue: 2
 --- !u!212 &83067004
 SpriteRenderer:
   m_ObjectHideFlags: 0

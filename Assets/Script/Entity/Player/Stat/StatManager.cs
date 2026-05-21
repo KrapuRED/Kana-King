@@ -1,6 +1,5 @@
-using UnityEngine;
 using System.Collections.Generic;
-
+using UnityEngine;
 public enum StatType
 {
     Attack,
@@ -75,27 +74,19 @@ public class StatData
     }
 }
 
-public class PlayerStat : MonoBehaviour
+public class StatManager : MonoBehaviour
 {
+    [SerializeField] protected List<StatData> stats = new();
+    protected Dictionary<StatType, StatData> statDictionary;
 
-    public static PlayerStat instance;
-
-    public List<StatData> stats = new ();
-
-    private Dictionary<StatType, StatData> statDictionary;
-
-    private void Awake()
+    protected virtual void Awake()
     {
-        if (instance == null)
-            instance = this;
-        else
-            Destroy(gameObject);
-
-
-        statDictionary = new Dictionary<StatType, StatData>();
+        statDictionary =  new Dictionary<StatType, StatData>();
 
         foreach (var stat in stats)
         {
+            stat.UpdateTotalValue();
+
             statDictionary.Add(stat.statType, stat);
         }
     }
