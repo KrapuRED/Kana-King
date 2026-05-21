@@ -13,52 +13,79 @@ public class ShopManager : MonoBehaviour
             Destroy(gameObject);
     }
 
-    [SerializeField] private Transform itemShopSpawner;
-    [SerializeField] private GameObject itemShopPrefab;
-    [SerializeField] private int itemShopCount;
+    [SerializeField] private Transform shopItemSpawner;
+    [SerializeField] private GameObject shopItemPrefab;
+    [SerializeField] private int shopItemCount;
+
+    [SerializeField] private List<ShopSO> allShopItems;
+    [SerializeField] private List<ShopSO> currentSpawnedItems;
 
 
-    [Header("Skill Player")]
-    private List<string> skillPlayer;
-
-    [Header("Item Attack Player")]
-    private List<string> itemAttack;
-
-    [Header("Item Deffense Player")]
-    private List<string> itemDeffense;
-
-    private void Spawning()
+    private void Start()
     {
-        for (int i = 0;i< itemShopCount; i++)
+        allShopItems = ShopDatabase.instance.GetShopItems();
+    }
+
+    public void SpawnShopItems()
+    {
+        currentSpawnedItems.Clear();
+        for (int i = shopItemSpawner.childCount - 1; i >= 0; i--)
         {
-            GameObject x = Instantiate(itemShopPrefab, itemShopSpawner);
+            Destroy(shopItemSpawner.GetChild(i).gameObject);
+        }
+
+        for (int i = 0; i< shopItemCount; i++)
+        {
+            int randomIndex = GetRandomIndex();
+            GameObject x = Instantiate(shopItemPrefab, shopItemSpawner);
+            x.GetComponent<ItemShopPrefab>().SetUp(allShopItems[randomIndex]);
+            currentSpawnedItems.Add(allShopItems[randomIndex]);
         }
     }
 
 
-    public void BuyItem(ItemSO itemSO)
+    private int GetRandomIndex()
     {
-        if(ItemCategory.Weapon == itemSO.ItemCategory)
-        {
+        int randomIndex = Random.Range(0, allShopItems.Count);
 
+        while (currentSpawnedItems.Contains(allShopItems[randomIndex]))
+        {
+            randomIndex = Random.Range(0, allShopItems.Count);
         }
-        else if (ItemCategory.Skill == itemSO.ItemCategory)
-        {
 
-        }
-        else if (ItemCategory.Defense == itemSO.ItemCategory)
-        {
+        return randomIndex;
+    }
 
+    public void BuyItem(ShopSO shopData)
+    {
+        switch (shopData.modifierType)
+        {
+            case ShopModifierType.Flat:
+
+                PlayerStat.instance.AddFlatBuff(shopData.statType, shopData.modifierValue);
+                break;
+
+            case ShopModifierType.Percentage:
+
+                PlayerStat.instance.AddPercentBuff(shopData.statType, shopData.modifierValue / 100f);
+
+                break;
         }
     }
 
     public bool CheckPlayerCurrency(int itemPrice)
     {
-        int playerCurrency = 0; //ambil playerCurrency dari player 
+        int playerCurrency = 2; //ambil playerCurrency dari player 
         if(playerCurrency >= itemPrice)
+        {
+            Debug.Log("Berhasil");
             return true;
+        }
         else
+        {
+            Debug.Log("Ga cukup Uang");
             return false;
+        }
     }
 
 }

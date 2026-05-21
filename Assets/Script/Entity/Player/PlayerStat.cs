@@ -20,43 +20,58 @@ public class StatData
     public float baseValue;
 
     [Header("Runtime Buff")]
-    private float flatBonus;
-    private float percentBonus;
+    [SerializeField] private float flatBonus;
+    [SerializeField] private float percentBonus;
 
-    public float TotalValue
+    [Header("Debug")]
+    [SerializeField] private float totalValue;
+
+    public float TotalValue => totalValue;
+
+    public void UpdateTotalValue()
     {
-        get
-        {
-            return (baseValue + flatBonus) * (1 + percentBonus);
-        }
+        totalValue = (baseValue + flatBonus) * (1 + percentBonus);
     }
 
     // =========================
-    // FLAT BUFF
+    // BASE VALUE
+    // =========================
+    public void AddBaseValue(float amount)
+    {
+        baseValue += amount;
+        UpdateTotalValue();
+    }
+
+    // =========================
+    // FLAT
     // =========================
 
     public void AddFlatBuff(float amount)
     {
         flatBonus += amount;
+        UpdateTotalValue();
     }
 
     public void RemoveFlatBuff(float amount)
     {
         flatBonus -= amount;
+        UpdateTotalValue();
     }
 
     // =========================
-    // PERCENT BUFF
+    // PERCENT
     // =========================
 
     public void AddPercentBuff(float percent)
     {
         percentBonus += percent;
+        UpdateTotalValue();
     }
 
     public void RemovePercentBuff(float percent)
     {
         percentBonus -= percent;
+        UpdateTotalValue();
     }
 }
 
@@ -65,7 +80,7 @@ public class PlayerStat : MonoBehaviour
 
     public static PlayerStat instance;
 
-    public List<StatData> stats = new List<StatData>();
+    public List<StatData> stats = new ();
 
     private Dictionary<StatType, StatData> statDictionary;
 
@@ -89,6 +104,16 @@ public class PlayerStat : MonoBehaviour
     {
         return statDictionary[type].TotalValue;
     }
+
+    // =========================
+    // BASE VALUE
+    // =========================
+
+    public void AddBaseValue(StatType type, float amount)
+    {
+        statDictionary[type].AddBaseValue(amount);
+    }
+
 
     // =========================
     // FLAT

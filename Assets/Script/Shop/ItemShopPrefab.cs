@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 
 public class ItemShopPrefab : MonoBehaviour
 {
-    [SerializeField] private ItemSO item;
+    [SerializeField] private ShopSO itemShop;
     [SerializeField] private int price;
 
     [SerializeField] private Image itemIcon;
@@ -15,17 +15,19 @@ public class ItemShopPrefab : MonoBehaviour
 
 
 
-    public void SetUp(ItemSO itemSO)
+    public void SetUp(ShopSO shopSO)
     {
-        item = itemSO;
-        itemName.text = item.name;
-        itemType.text = item.ItemCategory.ToString();
-        itemDescription.text = item.itemDescription;
+        itemShop = shopSO;
+        itemName.text = itemShop.name;
+        itemType.text = itemShop.statType.ToString();
+        itemDescription.text = itemShop.statDescription;
+        price = itemShop.itemPrice;
     }
 
     public void Buy()
     {
         if (!ShopManager.instance.CheckPlayerCurrency(price)) return;
-        
+        ShopManager.instance.BuyItem(itemShop);
+        Destroy(gameObject);
     }
 }

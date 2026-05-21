@@ -4,6 +4,23 @@ using UnityEngine;
 
 public class ShopDatabase : MonoBehaviour
 {
-    //[Header("Stat Player")]
-    //private List<string> 
+
+    public static ShopDatabase instance;
+
+    private void Awake()
+    {
+        if (instance == null)
+            instance = this;
+        else
+            Destroy(gameObject);
+    }
+
+
+    [SerializeField] private List<ShopSO> shopItems = new ();
+
+
+    public List<ShopSO> GetShopItems()
+    {
+        return shopItems;
+    }
 }
