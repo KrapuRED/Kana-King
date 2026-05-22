@@ -13,30 +13,42 @@ public class ArtefactManager : MonoBehaviour
             Destroy(gameObject);
     }
 
+    [SerializeField] private ArtefactScript newArtefacts;
     [SerializeField] private List<ArtefactScript> currentArtefacts = new();
 
-
-    private void Start()
+    public void OpenArtefactManager(ArtefactScript artefact)
     {
-        ActivateAllArtefact();
+        newArtefacts = artefact;
+        ArtefactInventory.instance.SetUpArtefactInventory();
+        ArtefactInventory.instance.SetUpNewArtefact(newArtefacts);
     }
 
-    public void AddArtefact(ArtefactScript artefact)
+    public void AddArtefact()
     {
         if (CheckArtefactInventory())
         {
-            currentArtefacts.Add(artefact);
-            artefact.ArtefactActivated();
+            currentArtefacts.Add(newArtefacts);
+            newArtefacts.ArtefactActivated();
         }
     }
-
-    public void DeleteArtefact(ArtefactScript artefact)
+    public void StashArtefact()
     {
-        if (currentArtefacts.Contains(artefact))
+        newArtefacts = null;
+    }
+
+
+    public void DeleteArtefact(ArtefactSO artefact)
+    {
+        foreach(ArtefactScript x in currentArtefacts)
         {
-            artefact.ArtefactDeactivated();
-            currentArtefacts.Remove(artefact);
+            if (x.artefactSO == artefact)
+            {
+                x.ArtefactDeactivated();
+                currentArtefacts.Remove(x);
+                break;
+            }
         }
+        ArtefactInventory.instance.SetUpArtefactInventory();
     }
 
     public void ActivateAllArtefact()
@@ -65,6 +77,9 @@ public class ArtefactManager : MonoBehaviour
         return currentArtefacts;
     }
 
-
+    public ArtefactScript ReturnNewArtefact()
+    {
+        return newArtefacts;
+    }
 
 }

@@ -2,17 +2,20 @@ using UnityEngine;
 
 public class ArtefactScript : MonoBehaviour, IArtefact
 {
-    [SerializeField] private ArtefactSO artefactSO;
+    public ArtefactSO artefactSO;
     [SerializeField] private bool isActivated;
 
     public void ArtefactActivated()
     {
+        if(isActivated)return;
         ArtefactActive();
+        isActivated = true;
     }
 
     public void ArtefactDeactivated()
     {
         ArtefactDisable();
+        isActivated = false;
     }
 
     protected virtual void ArtefactActive()
