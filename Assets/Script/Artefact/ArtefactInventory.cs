@@ -53,7 +53,7 @@ public class ArtefactInventory : MonoBehaviour
 
     public void OpenArtefactDescription(ArtefactSO artefactSO)
     {
-        artefactName.text = artefactSO.name;
+        artefactName.text = artefactSO.artefactName;
         artefactDescription.text = artefactSO.artefactDescription;
     }
 
