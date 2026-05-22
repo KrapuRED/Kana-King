@@ -6,5 +6,4 @@ public class ArtefactSO : ScriptableObject
     public string artefactName;
     public Sprite artefactSprite;
     public string artefactDescription;
-    public IArtefact artefactScript;
 }

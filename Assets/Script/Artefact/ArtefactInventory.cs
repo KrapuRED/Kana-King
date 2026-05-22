@@ -1,27 +1,41 @@
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class ArtefactInventory : MonoBehaviour
 {
-    [SerializeField] private List<ArtefactSO> currentArtefactSO = new();
 
+    public static ArtefactInventory instance;
 
-    public void ActivateAllArtefact()
+    private void Awake()
     {
-        foreach(ArtefactSO artefact in currentArtefactSO)
-        {
-            artefact.artefactScript.ArtefactActivated();
-        }
+        if(instance == null)
+            instance = this;
+        else
+            Destroy(gameObject);
     }
 
-    public bool CheckArtefactInventory()
+    [Header("New Artefact")]
+    [SerializeField] private Transform newArtefactSpawn;
+
+    [Header("Current Artefact")]
+    [SerializeField] private Transform currArtefactSpawn;
+    [SerializeField] private GameObject currentArtefactUIPrefab;
+
+    [Header("Description Artefact")]
+    [SerializeField] private TMP_Text artefactName;
+    [SerializeField] private TMP_Text artefactDescription;
+
+
+    public void SetUpArtefactInventory()
     {
-        if(currentArtefactSO.Count > 3)
-        {
-            return false;
-        }
-        else
-            return true;
+
+    }
+
+    public void OpenArtefactDescription(ArtefactSO artefactSO)
+    {
+        artefactName.text = artefactSO.name;
+        artefactDescription.text = artefactSO.artefactDescription;
     }
 
 }
