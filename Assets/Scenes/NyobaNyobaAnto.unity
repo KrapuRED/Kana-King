@@ -1120,7 +1120,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &777983779
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2200,6 +2200,7 @@ MonoBehaviour:
   currentArtefacts:
   - {fileID: 8784465959886752642, guid: e3f17a31434064a449e5e4b5f9dc83f8, type: 3}
   - {fileID: 6421239393930181031, guid: d4b20949671e9434f9313f29ae7ef9ad, type: 3}
+  artefactInventoryPanel: {fileID: 777983778}
 --- !u!4 &1670770031
 Transform:
   m_ObjectHideFlags: 0

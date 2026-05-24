@@ -16,8 +16,12 @@ public class ArtefactManager : MonoBehaviour
     [SerializeField] private ArtefactScript newArtefacts;
     [SerializeField] private List<ArtefactScript> currentArtefacts = new();
 
+    [SerializeField] private GameObject artefactInventoryPanel;
+
+
     public void OpenArtefactManager(ArtefactScript artefact)
     {
+        artefactInventoryPanel.SetActive(true);
         newArtefacts = artefact;
         ArtefactInventory.instance.SetUpArtefactInventory();
         ArtefactInventory.instance.SetUpNewArtefact(newArtefacts);
@@ -30,10 +34,12 @@ public class ArtefactManager : MonoBehaviour
             currentArtefacts.Add(newArtefacts);
             newArtefacts.ArtefactActivated();
         }
+        artefactInventoryPanel.SetActive(false);
     }
     public void StashArtefact()
     {
         newArtefacts = null;
+        artefactInventoryPanel.SetActive(false);
     }
 
 
