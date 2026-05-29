@@ -18,6 +18,8 @@ public class RomajiPrefabScript : MonoBehaviour
         Sequence seq = DOTween.Sequence();
         seq.Append(text.DOFade(1f, 0.6f));
         seq.Join(transform.DOScale(1f, 1f).SetEase(Ease.OutBack));
+        seq.SetUpdate(true);
+
         buttonRomaji.onClick.AddListener(OnClick);
     }
 

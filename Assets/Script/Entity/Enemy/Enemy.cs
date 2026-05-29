@@ -13,13 +13,14 @@ public class Enemy : MonoBehaviour, IDamageable
     private void Awake()
     {
         currentHealth = enemyData.maxHealth;
+        currentHealth += WaveManager.instance.ReturnWave() / 3;
 
-        SpriteRenderer sr = GetComponent<SpriteRenderer>();
+        //SpriteRenderer sr = GetComponent<SpriteRenderer>();
 
-        if (sr != null)
-        {
-            sr.sprite = enemyData.enemySprite;
-        }
+        //if (sr != null)
+        //{
+        //    sr.sprite = enemyData.enemySprite;
+        //}
     }
 
     public void TakeDamage(float damage)

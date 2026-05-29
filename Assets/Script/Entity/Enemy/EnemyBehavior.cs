@@ -39,13 +39,14 @@ public class EnemyBehavior : MonoBehaviour
         rb.linearVelocity = direction * enemyData.speed;
     }
 
-    private void OnCollisionStay2D(Collision2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        if (!collision.gameObject.CompareTag("Player")) return;
-
+        Debug.Log("Hit");
+        if (!collision.CompareTag("Player")) return;
+        Debug.Log("Player Hit");
         if (Time.time >= lastAttackTime + attackCooldown)
         {
-            Player playerScript = collision.gameObject.GetComponent<Player>();
+            Player playerScript = collision.GetComponent<Player>();
 
             if (playerScript != null)
             {

@@ -27,6 +27,7 @@ public class ItemShopPrefab : MonoBehaviour
     public void Buy()
     {
         if (!ShopManager.instance.CheckPlayerCurrency(price)) return;
+        PlayerStat.instance.RemoveCoin(price);
         ShopManager.instance.BuyItem(itemShop);
         Destroy(gameObject);
     }

@@ -75,7 +75,7 @@ public class ShopManager : MonoBehaviour
 
     public bool CheckPlayerCurrency(int itemPrice)
     {
-        int playerCurrency = 2; //ambil playerCurrency dari player 
+        int playerCurrency = PlayerStat.instance.ReturnCoin();
         if(playerCurrency >= itemPrice)
         {
             Debug.Log("Berhasil");

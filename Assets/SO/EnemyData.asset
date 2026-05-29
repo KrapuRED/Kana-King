@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 430b2d3d149f2dc4cb3481a3dce780a0, type: 3}
   m_Name: EnemyData
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 1
   enemyName: Slime
   damage: 10
-  speed: 5
+  speed: 3
   enemyType: 0
   enemySprite: {fileID: 0}
-  enemyPrefab: {fileID: 0}
+  enemyPrefab: {fileID: 5702272981671800703, guid: 80819666c59a583409033941ab040bb0, type: 3}
   exp: 5

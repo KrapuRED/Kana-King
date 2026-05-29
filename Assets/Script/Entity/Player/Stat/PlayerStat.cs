@@ -25,6 +25,7 @@ public class PlayerStat : StatManager
 
 
     [SerializeField] private List<BaseStatData> baseStatDatas = new ();
+    [SerializeField] private int coin;
 
     private void Start()
     {
@@ -33,4 +34,19 @@ public class PlayerStat : StatManager
             AddBaseValue(data.statType, data.baseValue);
         }
     }
+
+    public void AddCoin(int amount)
+    {
+        coin += amount;
+    }
+
+    public void RemoveCoin(int amount)
+    {
+        coin -= amount;
+    }
+    public int ReturnCoin()
+    {
+        return coin;
+    }
+
 }
