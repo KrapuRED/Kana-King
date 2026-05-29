@@ -13,6 +13,10 @@ public class ShopManager : MonoBehaviour
             Destroy(gameObject);
     }
 
+    [Header("Shop Panel")]
+    [SerializeField] private GameObject shopPanel;
+
+
     [SerializeField] private Transform shopItemSpawner;
     [SerializeField] private GameObject shopItemPrefab;
     [SerializeField] private int shopItemCount;
@@ -25,6 +29,14 @@ public class ShopManager : MonoBehaviour
     {
         allShopItems = ShopDatabase.instance.GetShopItems();
     }
+
+
+    public void OpenShop()
+    {
+        shopPanel.SetActive(true);
+        SpawnShopItems();
+    }
+
 
     public void SpawnShopItems()
     {

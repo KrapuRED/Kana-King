@@ -41,7 +41,7 @@ public class WaveManager : MonoBehaviour
         }
         else
         {
-            //Open Shop
+            ShopManager.instance.OpenShop();
             StartCoroutine(StartWaveCountdown());
         }
     }
