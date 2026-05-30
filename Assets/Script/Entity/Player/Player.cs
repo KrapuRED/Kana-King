@@ -9,8 +9,9 @@ public class Player : MonoBehaviour, IDamageable
     public float CurrentHealth => currentHealth;
     public float Damage => damage;
 
-    private void Awake()
+    private void Start()
     {
+        maxHealth = PlayerStat.instance.GetStat(StatType.Health);
         currentHealth = maxHealth;
     }
 

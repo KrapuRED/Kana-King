@@ -46,6 +46,7 @@ public class ItemScript : MonoBehaviour, IPickUp
         if (collision.CompareTag("Player"))
         {
             Debug.Log("hi");
+            Destroy(gameObject);
         }
     }
 }

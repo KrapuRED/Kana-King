@@ -2,15 +2,18 @@ using UnityEngine;
 
 public class PauseSystem : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public static PauseSystem instance;
+
+    private void Awake()
     {
-        
+        if (instance == null)
+            instance = this;
+        else
+            Destroy(gameObject);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
+    [SerializeField] private bool onPause;
+
+
 }

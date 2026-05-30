@@ -10,11 +10,14 @@ public class Enemy : MonoBehaviour, IDamageable
     public float CurrentHealth => currentHealth;
     public float Damage => enemyData.damage;
 
+    [Header("Enemy Drop")]
+    [SerializeField] private int coinDrop;
+
     private void Awake()
     {
         currentHealth = enemyData.maxHealth;
         currentHealth += WaveManager.instance.ReturnWave() / 3;
-
+        coinDrop = ((int)currentHealth);
         //SpriteRenderer sr = GetComponent<SpriteRenderer>();
 
         //if (sr != null)
@@ -37,6 +40,7 @@ public class Enemy : MonoBehaviour, IDamageable
     private void Die()
     {
         Debug.Log(enemyData.enemyName + " Die");
+        PlayerStat.instance.AddCoin(coinDrop);
 
         Destroy(gameObject);
     }
