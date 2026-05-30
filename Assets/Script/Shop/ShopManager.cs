@@ -34,9 +34,19 @@ public class ShopManager : MonoBehaviour
     public void OpenShop()
     {
         shopPanel.SetActive(true);
+        PauseSystem.instance.AddPauseRequest();
         SpawnShopItems();
     }
-
+    public void CloseShop()
+    {
+        PauseSystem.instance.RemovePauseRequest();
+        currentSpawnedItems.Clear();
+        for (int i = shopItemSpawner.childCount - 1; i >= 0; i--)
+        {
+            Destroy(shopItemSpawner.GetChild(i).gameObject);
+        }
+        shopPanel.SetActive(false);
+    }
 
     public void SpawnShopItems()
     {

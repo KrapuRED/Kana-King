@@ -12,12 +12,16 @@ public class Enemy : MonoBehaviour, IDamageable
 
     [Header("Enemy Drop")]
     [SerializeField] private int coinDrop;
+    [SerializeField] private float expDrop;
+    [SerializeField] private GameObject expPrefab;
+
 
     private void Awake()
     {
         currentHealth = enemyData.maxHealth;
         currentHealth += WaveManager.instance.ReturnWave() / 3;
         coinDrop = ((int)currentHealth);
+        expDrop = currentHealth;
         //SpriteRenderer sr = GetComponent<SpriteRenderer>();
 
         //if (sr != null)
@@ -41,6 +45,8 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         Debug.Log(enemyData.enemyName + " Die");
         PlayerStat.instance.AddCoin(coinDrop);
+        GameObject x = Instantiate(expPrefab, transform.position, Quaternion.identity);
+        x.GetComponent<ExpScript>().SetEXPValue(expDrop);
 
         Destroy(gameObject);
     }

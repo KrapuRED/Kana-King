@@ -39,11 +39,6 @@ public class WaveManager : MonoBehaviour
             //Open Artefact
             StartCoroutine(StartWaveCountdown()); 
         }
-        else
-        {
-            ShopManager.instance.OpenShop();
-            StartCoroutine(StartWaveCountdown());
-        }
     }
 
 

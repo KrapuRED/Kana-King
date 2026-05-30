@@ -25,6 +25,7 @@ public class PlayerStat : StatManager
 
 
     [SerializeField] private List<BaseStatData> baseStatDatas = new ();
+
     [SerializeField] private int coin;
 
     private void Start()
@@ -48,5 +49,6 @@ public class PlayerStat : StatManager
     {
         return coin;
     }
+
 
 }

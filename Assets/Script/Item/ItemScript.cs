@@ -45,8 +45,14 @@ public class ItemScript : MonoBehaviour, IPickUp
     {
         if (collision.CompareTag("Player"))
         {
-            Debug.Log("hi");
-            Destroy(gameObject);
+            OnHitPlayer();
         }
+    }
+
+
+    protected virtual void OnHitPlayer()
+    {
+        Debug.Log("hi");
+        Destroy(gameObject);
     }
 }

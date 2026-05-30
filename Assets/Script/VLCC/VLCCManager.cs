@@ -63,6 +63,7 @@ public class VLCCManager : MonoBehaviour
         dataVLCC = DatabaseVLCC.instance.FindData(name);
         SetUpKatakana();
         SetUpRomaji();
+        PauseSystem.instance.AddPauseRequest();
     }
 
     public void SetUpKatakana()
@@ -132,10 +133,12 @@ public class VLCCManager : MonoBehaviour
         for(int i = 0; i < romajiOrder.Count; i++)
             VLCCUi.instance.SpawnRomajiAnswer(romajiOrder[i]);
         StartCoroutine(ResetVLCC());
+        PauseSystem.instance.RemovePauseRequest();
     }
     public void VLCCComplete()
     {
         Debug.Log("Berhasil");
         StartCoroutine(ResetVLCC());
+        PauseSystem.instance.RemovePauseRequest();
     }
 }

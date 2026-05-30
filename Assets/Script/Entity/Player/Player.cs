@@ -9,6 +9,10 @@ public class Player : MonoBehaviour, IDamageable
     public float CurrentHealth => currentHealth;
     public float Damage => damage;
 
+    [SerializeField] private float currPlayerExp;
+    [SerializeField] private float maxPlayerExp;
+    [SerializeField] private int level;
+
     private void Start()
     {
         maxHealth = PlayerStat.instance.GetStat(StatType.Health);
@@ -30,5 +34,21 @@ public class Player : MonoBehaviour, IDamageable
     {
         Debug.Log("Player Die");
         Destroy(gameObject);
+    }
+
+    public void AddExp(float amount)
+    {
+        currPlayerExp += amount;
+        if(currPlayerExp >= maxPlayerExp)
+        {
+            currPlayerExp -= maxPlayerExp;
+            OnLevelUp();
+        }
+    }
+
+    public void OnLevelUp()
+    {
+        level++;
+        ShopManager.instance.OpenShop();
     }
 }
