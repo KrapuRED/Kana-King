@@ -47,7 +47,7 @@ public class Enemy : MonoBehaviour, IDamageable
         PlayerStat.instance.AddCoin(coinDrop);
         GameObject x = Instantiate(expPrefab, transform.position, Quaternion.identity);
         x.GetComponent<ExpScript>().SetEXPValue(expDrop);
-
+        EnemySpawner.instance.EnemyDeathCount();
         Destroy(gameObject);
     }
 

@@ -1,3 +1,5 @@
+using System.Collections;
+using Unity.Cinemachine;
 using UnityEngine;
 
 public class Player : MonoBehaviour, IDamageable
@@ -15,9 +17,6 @@ public class Player : MonoBehaviour, IDamageable
 
 
 
-
-
-
     [Header("Stats")]
     public float maxHealth => PlayerStat.instance.GetStat(StatType.Health);
     [SerializeField] private float currentHealth;
@@ -31,6 +30,22 @@ public class Player : MonoBehaviour, IDamageable
     [SerializeField] private float maxPlayerExp;
     [SerializeField] private int level;
 
+
+    [Header("Lose")]
+    [SerializeField] private LoseScript loseScript;
+
+
+    [Header("Taking Damage")]
+    [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] private float delayAnimationDamage = 0.3f;
+    [SerializeField] private CinemachineImpulseSource cinemachineImpulseSource;
+
+    [Header("Healing Artefact")]
+    [SerializeField] private float healingAmount = 5f;
+    [SerializeField] private float healInterval = 1f;
+    private Coroutine healCoroutine;
+
+
     private void Start()
     {
         currentHealth = maxHealth;
@@ -40,6 +55,9 @@ public class Player : MonoBehaviour, IDamageable
     {
         currentHealth -= damage;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+
+        cinemachineImpulseSource.GenerateImpulse();
+        StartCoroutine(TakingDamageAnimation());
 
         PlayerUI.instance.HealthUISetUp();
 
@@ -65,7 +83,8 @@ public class Player : MonoBehaviour, IDamageable
     private void Die()
     {
         Debug.Log("Player Die");
-        Destroy(gameObject);
+        loseScript.LoseUISetUp();
+        //Destroy(gameObject);
     }
 
     public void AddExp(float amount)
@@ -83,4 +102,53 @@ public class Player : MonoBehaviour, IDamageable
         level++;
         ShopManager.instance.OpenShop();
     }
+
+    IEnumerator TakingDamageAnimation()
+    {
+        spriteRenderer.color = Color.red;
+        yield return new WaitForSeconds(delayAnimationDamage);
+        spriteRenderer.color = Color.white;
+    }
+
+
+
+    public void HealArtefactActivated()
+    {
+        if (healCoroutine != null)
+        {
+            StopCoroutine(healCoroutine);
+        }
+
+        // Mulai jalankan healing per detik
+        healCoroutine = StartCoroutine(HealOverTime());
+    }
+
+
+    public void HealArtefactDisable()
+    {
+        Debug.Log("Arte regen mati");
+        if (healCoroutine != null)
+        {
+            StopCoroutine(healCoroutine);
+            healCoroutine = null; // Kosongkan kembali referensinya
+        }
+    }
+
+
+    private IEnumerator HealOverTime()
+    {
+        while (true)
+        {
+            // Panggil fungsi heal dari player kamu
+            if (Player.instance != null)
+            {
+                Player.instance.Healing(healingAmount);
+                Debug.Log($"Player di-heal sebesar {healingAmount}");
+            }
+
+            // Tunggu selama interval yang ditentukan (misal 1 detik) sebelum lanjut looping
+            yield return new WaitForSeconds(healInterval);
+        }
+    }
+
 }

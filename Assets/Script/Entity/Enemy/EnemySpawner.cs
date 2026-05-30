@@ -53,7 +53,6 @@ public class EnemySpawner : MonoBehaviour
 
         int totalEnemiesForWave = baseSpawning + (WaveManager.instance.ReturnWave() * 10);
         currEnemyAlived = totalEnemiesForWave;
-
         spawnCoroutine = StartCoroutine(SpawnWaveRoutine(totalEnemiesForWave));
     }
 
@@ -91,11 +90,19 @@ public class EnemySpawner : MonoBehaviour
 
     public void EnemyDeathCount()
     {
+        Debug.Log("Hola");
         currEnemyAlived--;
+        totalEnemyDefeated++;
         if(currEnemyAlived <= 0)
         {
             WaveManager.instance.OnWavedFinished();
         }
+    }
+
+
+    public int ReturnTotalEnemyDefeated()
+    {
+        return totalEnemyDefeated;
     }
 
 }

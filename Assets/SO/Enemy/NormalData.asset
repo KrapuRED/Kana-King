@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   enemyName: Slime
-  damage: 10
+  damage: 1
   speed: 3
   enemyType: 0
   enemySprite: {fileID: 0}

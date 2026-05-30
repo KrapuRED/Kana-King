@@ -38,8 +38,9 @@ public class WaveManager : MonoBehaviour
         {
             ArtefactManager.instance.AddArtefact();
             //Open Artefact
-            StartCoroutine(StartWaveCountdown()); 
+             
         }
+        StartCoroutine(StartWaveCountdown());
     }
 
 

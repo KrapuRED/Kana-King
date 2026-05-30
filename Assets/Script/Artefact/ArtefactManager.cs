@@ -19,6 +19,12 @@ public class ArtefactManager : MonoBehaviour
     [SerializeField] private GameObject artefactInventoryPanel;
 
 
+    private void Start()
+    {
+        ActivateAllArtefact();
+    }
+
+
     public void OpenArtefactManager(ArtefactScript artefact)
     {
         artefactInventoryPanel.SetActive(true);

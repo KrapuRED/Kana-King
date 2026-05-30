@@ -65,7 +65,7 @@ public class PlayerAttackMelee : MonoBehaviour
     private float AttackCalculation()
     {
         // Jadi attack = baseAttack dari weapon * stat yang dimiliki player
-        float x = baseDamage * StatCalculationManager.instance.AttackBoost();
+        float x = baseDamage + StatCalculationManager.instance.AttackBoost();
 
         // Jadi dicek nge crit g nya
         if (StatCalculationManager.instance.CritChance())

@@ -16,6 +16,9 @@ public class ShopManager : MonoBehaviour
     [Header("Shop Panel")]
     [SerializeField] private GameObject shopPanel;
 
+    [Header("Refresh Price")]
+    [SerializeField] private int refreshPrice = 2;
+
 
     [SerializeField] private Transform shopItemSpawner;
     [SerializeField] private GameObject shopItemPrefab;
@@ -33,6 +36,7 @@ public class ShopManager : MonoBehaviour
 
     public void OpenShop()
     {
+        if (shopPanel.activeSelf) return;
         shopPanel.SetActive(true);
         PauseSystem.instance.AddPauseRequest();
         SpawnShopItems();
@@ -109,5 +113,17 @@ public class ShopManager : MonoBehaviour
             return false;
         }
     }
+    
+
+    public void RefreshShop()
+    {
+        if (CheckPlayerCurrency(refreshPrice))
+        {
+            PlayerStat.instance.RemoveCoin(refreshPrice);
+            SpawnShopItems();
+            ShopUI.instance.ShopUISetUp();
+        }
+    }
+
 
 }
