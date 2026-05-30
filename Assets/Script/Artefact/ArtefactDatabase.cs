@@ -16,4 +16,15 @@ public class ArtefactDatabase : MonoBehaviour
     [SerializeField] private List<ArtefactScript> allArtefact;
 
 
+    public ArtefactScript ReturnRandomArtefact()
+    {
+        return allArtefact[RandomIndex()];
+    }
+
+    private int RandomIndex()
+    {
+        return Random.Range(0, allArtefact.Count);
+    }
+
+
 }

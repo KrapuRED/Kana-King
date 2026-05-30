@@ -1143,7 +1143,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data:
   - english: katakana
-    katakana: abcd
+    katakana: "\u30AB\u30BF\u30AB\u30CA"
     romaji: ka ta ka na
   - english: sdsds
     katakana: sdds

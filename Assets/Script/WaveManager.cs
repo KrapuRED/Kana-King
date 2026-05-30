@@ -36,6 +36,7 @@ public class WaveManager : MonoBehaviour
     {
         if(wave % 5 == 0)
         {
+            ArtefactManager.instance.AddArtefact();
             //Open Artefact
             StartCoroutine(StartWaveCountdown()); 
         }

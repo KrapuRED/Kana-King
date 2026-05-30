@@ -25,6 +25,7 @@ public class ArtefactManager : MonoBehaviour
         newArtefacts = artefact;
         ArtefactInventory.instance.SetUpArtefactInventory();
         ArtefactInventory.instance.SetUpNewArtefact(newArtefacts);
+        PauseSystem.instance.AddPauseRequest();
     }
 
     public void AddArtefact()
@@ -35,11 +36,13 @@ public class ArtefactManager : MonoBehaviour
             newArtefacts.ArtefactActivated();
         }
         artefactInventoryPanel.SetActive(false);
+        PauseSystem.instance.RemovePauseRequest();
     }
     public void StashArtefact()
     {
         newArtefacts = null;
         artefactInventoryPanel.SetActive(false);
+        PauseSystem.instance.RemovePauseRequest();
     }
 
 
