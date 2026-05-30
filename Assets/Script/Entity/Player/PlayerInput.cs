@@ -1,9 +1,11 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
+
 
 public class PlayerInput : MonoBehaviour
 {
-    [SerializeField] private PlayerMovement playerMovement; 
-
+    [SerializeField] private PlayerMovement playerMovement;
+    [SerializeField] private PlayerAttackMelee playerAttackMelee;
     [Header("Key Bind")]
     [SerializeField] private KeyCode Up;
     [SerializeField] private KeyCode Down;
@@ -33,5 +35,13 @@ public class PlayerInput : MonoBehaviour
         }
 
         playerMovement.OnMovementPlayer(horizontalInput, verticalInput);
+    }
+
+
+    public void OnAttack(InputAction.CallbackContext ctx)
+    {
+        Debug.Log("attack");
+        if(ctx.performed)
+            playerAttackMelee.Attack();
     }
 }

@@ -32,7 +32,7 @@ public class VLCCManager : MonoBehaviour
         {
             if (duration > 0)
             {
-                duration -= Time.deltaTime;
+                duration -= Time.unscaledDeltaTime;
             }
             else if (onVLCC && duration <= 0)
             {

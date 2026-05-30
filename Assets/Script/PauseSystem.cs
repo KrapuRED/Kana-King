@@ -12,6 +12,8 @@ public class PauseSystem : MonoBehaviour
     // Game dianggap pause jika ada minimal 1 UI yang meminta pause
     public bool IsPaused => pauseRefCount > 0;
 
+    [SerializeField] private UnityEngine.InputSystem.PlayerInput unityPlayerInput;
+
     private void Awake()
     {
         if (instance == null)
@@ -65,11 +67,13 @@ public class PauseSystem : MonoBehaviour
         {
             Time.timeScale = 0f; // Tetap freeze selama masih ada UI yang aktif
             Debug.Log($"Game Paused. Jumlah UI yang nge-pause: {pauseRefCount}");
+            unityPlayerInput.actions.FindActionMap("Player").Disable();
         }
         else
         {
             Time.timeScale = 1f; // Waktu jalan lagi HANYA jika semua UI sudah ditutup (Count = 0)
             Debug.Log("Game Resumed. Semua UI pause sudah bersih.");
+            unityPlayerInput.actions.FindActionMap("Player").Enable();
         }
     }
 }

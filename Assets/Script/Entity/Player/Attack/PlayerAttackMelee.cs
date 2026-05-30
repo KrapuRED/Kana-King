@@ -13,7 +13,9 @@ public class PlayerAttackMelee : MonoBehaviour
 
     [Header("Attack Cooldown")]
     [SerializeField] private float attackCooldown = 0.5f;
-    private bool canAttack;
+    private bool canAttack = true;
+
+    [SerializeField] private Animator animator;
 
 
     public void Attack()
@@ -21,8 +23,7 @@ public class PlayerAttackMelee : MonoBehaviour
         if (!canAttack)
             return;
 
-
-        StartCoroutine(AttackCooldown());
+        Debug.Log("Atack2");
 
         // Detect enemy
         Collider2D[] enemies = Physics2D.OverlapCircleAll(
@@ -41,6 +42,10 @@ public class PlayerAttackMelee : MonoBehaviour
                 damageable.TakeDamage(baseDamage);
             }
         }
+
+        animator.SetTrigger("onAttack");
+
+        StartCoroutine(AttackCooldown());
     }
 
     // Visualize attack range in Scene
