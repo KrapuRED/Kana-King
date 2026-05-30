@@ -118,12 +118,13 @@ public class VLCCManager : MonoBehaviour
     public IEnumerator ResetVLCC()
     {
         onVLCC = false;
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSecondsRealtime(2f);
         Debug.Log("Hello");
         dataVLCC = null;
         VLCCUi.instance.SetUpVLCCPanel();
         romajiOrder.Clear();
         VLCCUi.instance.DeleteAll();
+        PauseSystem.instance.RemovePauseRequest();
     }
 
 
@@ -133,12 +134,10 @@ public class VLCCManager : MonoBehaviour
         for(int i = 0; i < romajiOrder.Count; i++)
             VLCCUi.instance.SpawnRomajiAnswer(romajiOrder[i]);
         StartCoroutine(ResetVLCC());
-        PauseSystem.instance.RemovePauseRequest();
     }
     public void VLCCComplete()
     {
         Debug.Log("Berhasil");
         StartCoroutine(ResetVLCC());
-        PauseSystem.instance.RemovePauseRequest();
     }
 }

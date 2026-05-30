@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5514110419270052659
+--- !u!1 &7247326781778579131
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5284831722375211019}
-  - component: {fileID: 8784465959886752642}
+  - component: {fileID: 2873538122876673474}
+  - component: {fileID: 7098885640261899777}
   m_Layer: 0
-  m_Name: Tes2
+  m_Name: RegenHPArtefact
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5284831722375211019
+--- !u!4 &2873538122876673474
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5514110419270052659}
+  m_GameObject: {fileID: 7247326781778579131}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -32,17 +32,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8784465959886752642
+--- !u!114 &7098885640261899777
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5514110419270052659}
+  m_GameObject: {fileID: 7247326781778579131}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af88fba94adaef14489804e619c67e5f, type: 3}
+  m_Script: {fileID: 11500000, guid: e03a2a91952f86349abf8d9cc2e8ad15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   artefactSO: {fileID: 11400000, guid: 9c0c0cbf60df92046ab66cda728dee04, type: 2}
   isActivated: 0
+  healingAmount: 5
+  healInterval: 1

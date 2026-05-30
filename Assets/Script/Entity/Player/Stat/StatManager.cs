@@ -30,6 +30,11 @@ public class StatData
     public void UpdateTotalValue()
     {
         totalValue = (baseValue + flatBonus) * (1 + percentBonus);
+
+
+        //Buat Update semua UI (rencana make action)
+        PlayerUI.instance.HealthUISetUp();
+
     }
 
     // =========================

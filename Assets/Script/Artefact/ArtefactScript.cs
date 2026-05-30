@@ -3,7 +3,7 @@ using UnityEngine;
 public class ArtefactScript : MonoBehaviour, IArtefact
 {
     public ArtefactSO artefactSO;
-    [SerializeField] private bool isActivated;
+    [SerializeField] protected bool isActivated;
 
     public void ArtefactActivated()
     {

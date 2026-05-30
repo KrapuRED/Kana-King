@@ -52,7 +52,6 @@ public class ItemScript : MonoBehaviour, IPickUp
 
     protected virtual void OnHitPlayer()
     {
-        Debug.Log("hi");
-        Destroy(gameObject);
+        
     }
 }

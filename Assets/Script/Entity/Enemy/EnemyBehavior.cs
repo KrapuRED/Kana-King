@@ -41,9 +41,9 @@ public class EnemyBehavior : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        Debug.Log("Hit");
+        
         if (!collision.CompareTag("Player")) return;
-        Debug.Log("Player Hit");
+        
         if (Time.time >= lastAttackTime + attackCooldown)
         {
             Player playerScript = collision.GetComponent<Player>();

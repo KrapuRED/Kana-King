@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 875745616114116457}
-  - component: {fileID: 6421239393930181031}
+  - component: {fileID: 2737809577829011812}
   m_Layer: 0
-  m_Name: Tes3
+  m_Name: AttackBuffArtefact
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6421239393930181031
+--- !u!114 &2737809577829011812
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,8 +41,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 5529842601270354690}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af88fba94adaef14489804e619c67e5f, type: 3}
+  m_Script: {fileID: 11500000, guid: ea8951bdee6c75b4cb4607e82962f22b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   artefactSO: {fileID: 11400000, guid: 9c0c0cbf60df92046ab66cda728dee04, type: 2}
   isActivated: 0
+  attackBuff: 30
