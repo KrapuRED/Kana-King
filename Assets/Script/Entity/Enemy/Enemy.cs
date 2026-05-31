@@ -15,6 +15,10 @@ public class Enemy : MonoBehaviour, IDamageable
     [SerializeField] private float expDrop;
     [SerializeField] private GameObject expPrefab;
 
+    [Header("VLCC")]
+    [SerializeField] private string testName;
+    [SerializeField] private float duration = 5f;
+
 
     private void Awake()
     {
@@ -45,9 +49,17 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         Debug.Log(enemyData.enemyName + " Die");
         PlayerStat.instance.AddCoin(coinDrop);
+
         GameObject x = Instantiate(expPrefab, transform.position, Quaternion.identity);
         x.GetComponent<ExpScript>().SetEXPValue(expDrop);
         EnemySpawner.instance.EnemyDeathCount();
+
+        if(enemyData.enemyType == EnemyType.Boss)
+        {
+            VLCCManager.instance.SetDuration(duration, testName);
+        }
+
+
         Destroy(gameObject);
     }
 

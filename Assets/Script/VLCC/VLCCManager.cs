@@ -135,9 +135,12 @@ public class VLCCManager : MonoBehaviour
             VLCCUi.instance.SpawnRomajiAnswer(romajiOrder[i]);
         StartCoroutine(ResetVLCC());
     }
+
     public void VLCCComplete()
     {
         Debug.Log("Berhasil");
+        ArtefactManager.instance.OpenArtefactManager(ArtefactDatabase.instance.ReturnRandomArtefact());
         StartCoroutine(ResetVLCC());
+
     }
 }

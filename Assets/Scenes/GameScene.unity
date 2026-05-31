@@ -202,7 +202,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1206928309}
         m_TargetAssemblyTypeName: ArtefactInventory, Assembly-CSharp
         m_MethodName: TakeNewArtefact
         m_Mode: 1
@@ -4921,8 +4921,6 @@ MonoBehaviour:
   newArtefacts: {fileID: 0}
   currentArtefacts:
   - {fileID: 2737809577829011812, guid: d4b20949671e9434f9313f29ae7ef9ad, type: 3}
-  - {fileID: 6503001421939480336, guid: e3f17a31434064a449e5e4b5f9dc83f8, type: 3}
-  - {fileID: 7098885640261899777, guid: 08b83b5de62635941a96c096f4223605, type: 3}
   artefactInventoryPanel: {fileID: 814470012}
 --- !u!4 &1206928311
 Transform:
@@ -7201,10 +7199,10 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 741982751}
-  - {fileID: 185263413}
   - {fileID: 456232853}
   - {fileID: 814470013}
   - {fileID: 279050946}
+  - {fileID: 185263413}
   - {fileID: 694292431}
   - {fileID: 1905717299}
   m_Father: {fileID: 0}
@@ -7673,14 +7671,15 @@ MonoBehaviour:
   minRadius: 10
   maxRadius: 15
   normalEnemySO: {fileID: 11400000, guid: 10df6e62c1eab334c82c9e4c8fd36c75, type: 2}
-  bossEnemySO: {fileID: 0}
-  baseSpawning: 20
+  bossEnemySO: {fileID: 11400000, guid: 16819d80b869f7340bb9e82840f046be, type: 2}
+  baseSpawning: 1
   delaySpawning: 0.5
   minimumSpawnInOneTime: 1
   maximumSpawnInOneTime: 3
   currSpawning: 0
   currEnemyAlived: 0
   totalEnemyDefeated: 0
+  bossWave: 0
 --- !u!114 &2080193721
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7693,7 +7692,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2762fdb343bf16d4b9384a99515b45af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wave: 0
+  wave: 4
   delayNextWave: 3
 --- !u!4 &2080193722
 Transform:
@@ -7915,9 +7914,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ArtefactInventory, Assembly-CSharp
-        m_MethodName: DidntTakeNewArtefact
+      - m_Target: {fileID: 1206928310}
+        m_TargetAssemblyTypeName: ArtefactManager, Assembly-CSharp
+        m_MethodName: StashArtefact
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

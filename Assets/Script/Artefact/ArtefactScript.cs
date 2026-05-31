@@ -7,7 +7,12 @@ public class ArtefactScript : MonoBehaviour, IArtefact
 
     public void ArtefactActivated()
     {
-        if(isActivated)return;
+        if (isActivated)
+        {
+            Debug.Log("Sudah Aktif");
+            return;
+        }
+            
         ArtefactActive();
         isActivated = true;
     }

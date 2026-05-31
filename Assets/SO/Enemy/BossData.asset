@@ -18,5 +18,5 @@ MonoBehaviour:
   speed: 2
   enemyType: 1
   enemySprite: {fileID: 0}
-  enemyPrefab: {fileID: 0}
+  enemyPrefab: {fileID: 1939519503458012187, guid: e21bd98df5f31f048aeb43ff4d05e849, type: 3}
   exp: 10

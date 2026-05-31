@@ -21,6 +21,7 @@ public class ArtefactManager : MonoBehaviour
 
     private void Start()
     {
+        DeactivateAllArtefact();
         ActivateAllArtefact();
     }
 
@@ -39,15 +40,18 @@ public class ArtefactManager : MonoBehaviour
         if (CheckArtefactInventory())
         {
             currentArtefacts.Add(newArtefacts);
-            newArtefacts.ArtefactActivated();
         }
         artefactInventoryPanel.SetActive(false);
+        DeactivateAllArtefact();
+        ActivateAllArtefact();
         PauseSystem.instance.RemovePauseRequest();
     }
     public void StashArtefact()
     {
         newArtefacts = null;
         artefactInventoryPanel.SetActive(false);
+        DeactivateAllArtefact();
+        ActivateAllArtefact();
         PauseSystem.instance.RemovePauseRequest();
     }
 
@@ -76,7 +80,7 @@ public class ArtefactManager : MonoBehaviour
 
     public void DeactivateAllArtefact()
     {
-        foreach (var artefact in currentArtefacts)
+        foreach (var artefact in ArtefactDatabase.instance.ReturnAllArtefact())
         {
             artefact.ArtefactDeactivated();
         }

@@ -37,6 +37,8 @@ public class ShopManager : MonoBehaviour
     public void OpenShop()
     {
         if (shopPanel.activeSelf) return;
+
+        ShopUI.instance.ShopUISetUp();
         shopPanel.SetActive(true);
         PauseSystem.instance.AddPauseRequest();
         SpawnShopItems();

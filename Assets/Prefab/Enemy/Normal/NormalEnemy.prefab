@@ -107,6 +107,8 @@ MonoBehaviour:
   coinDrop: 0
   expDrop: 0
   expPrefab: {fileID: 3747922618828737037, guid: 4705a5db55d961242a99578c94291bfd, type: 3}
+  testName: katakana
+  duration: 5
 --- !u!114 &2759819727191305303
 MonoBehaviour:
   m_ObjectHideFlags: 0

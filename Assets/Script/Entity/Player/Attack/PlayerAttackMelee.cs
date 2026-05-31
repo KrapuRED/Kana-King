@@ -93,8 +93,12 @@ public class PlayerAttackMelee : MonoBehaviour
             {
                 float n = AttackCalculation();
                 damageable.TakeDamage(n);
-                if(healingAttack)
-                    Player.instance.Healing(n * healingPercentageFromAttack);
+                if (healingAttack)
+                {
+                    float healDamage = n * healingPercentageFromAttack/100;
+                    Player.instance.Healing(healDamage);
+                    Debug.Log($"Healing From Damage {healDamage})");
+                }
             }
         }
 

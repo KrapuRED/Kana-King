@@ -37,27 +37,43 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private int currSpawning = 0;
     [SerializeField] private int currEnemyAlived = 0;
     [SerializeField] private int totalEnemyDefeated = 0;
+    [SerializeField] private bool bossWave = false;
+
+
+
 
     private Coroutine spawnCoroutine;
 
+
     public void StartNextWave()
     {
-
-        // Jika ada coroutine wave sebelumnya yang masih jalan, matikan dulu supaya tidak double spawner
         if (spawnCoroutine != null)
         {
             StopCoroutine(spawnCoroutine);
         }
 
-        currSpawning = 0;        
+        currSpawning = 0;
+        bossWave = false; // Reset status boss wave di awal wave baru
 
-        int totalEnemiesForWave = baseSpawning + (WaveManager.instance.ReturnWave() * 10);
-        currEnemyAlived = totalEnemiesForWave;
+        int currWave = WaveManager.instance.ReturnWave();
+
+        // Tentukan apakah wave ini adalah boss wave
+        if (currWave % 5 == 0)
+        {
+            bossWave = true;
+        }
+
+        int totalEnemiesForWave = baseSpawning + (currWave * 10);
+
+        // JIKA Boss Wave, jumlah musuh yang hidup ditambah 1 (untuk si Boss)
+        currEnemyAlived = bossWave ? totalEnemiesForWave + 1 : totalEnemiesForWave;
+
         spawnCoroutine = StartCoroutine(SpawnWaveRoutine(totalEnemiesForWave));
     }
 
     private IEnumerator SpawnWaveRoutine(int totalEnemiesForWave)
     {
+        // 1. Spawn semua musuh biasa sampai habis
         while (currSpawning < totalEnemiesForWave)
         {
             int spawnCount = Random.Range(minimumSpawnInOneTime, maximumSpawnInOneTime + 1);
@@ -76,6 +92,19 @@ public class EnemySpawner : MonoBehaviour
             }
 
             yield return new WaitForSeconds(delaySpawning);
+        }
+
+        // 2. DI SINI: Musuh biasa sudah habis di-spawn semua.
+        // Jika ini adalah wave boss, spawn boss-nya sekarang!
+        if (bossWave)
+        {
+            // Beri sedikit jeda dramatis sebelum boss muncul (opsional)
+            yield return new WaitForSeconds(1.5f);
+
+            Vector2 bossSpawnPosition = GetRandomSpawnPosition2D();
+            Instantiate(bossEnemySO.enemyPrefab, bossSpawnPosition, Quaternion.identity);
+
+            Debug.Log("Boss telah bangkit!");
         }
     }
 

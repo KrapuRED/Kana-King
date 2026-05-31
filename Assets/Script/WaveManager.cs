@@ -34,12 +34,6 @@ public class WaveManager : MonoBehaviour
 
     public void OnWavedFinished()
     {
-        if(wave % 5 == 0)
-        {
-            ArtefactManager.instance.AddArtefact();
-            //Open Artefact
-             
-        }
         StartCoroutine(StartWaveCountdown());
     }
 

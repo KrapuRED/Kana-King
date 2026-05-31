@@ -104,9 +104,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyData: {fileID: 11400000, guid: 16819d80b869f7340bb9e82840f046be, type: 2}
-  coinDrop: 0
-  expDrop: 0
+  coinDrop: 1
+  expDrop: 1
   expPrefab: {fileID: 3747922618828737037, guid: 4705a5db55d961242a99578c94291bfd, type: 3}
+  testName: katakana
+  duration: 5
 --- !u!114 &2736012989481368736
 MonoBehaviour:
   m_ObjectHideFlags: 0
