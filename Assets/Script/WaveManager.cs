@@ -16,6 +16,11 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private int wave;
     [SerializeField] private float delayNextWave;
 
+
+    [Header("Reward Settings")]
+    [SerializeField] private GameObject cratePrefab; // Changed to Prefab for multiple waves
+    [SerializeField] private Transform crateSpawnPoint; // Where the crate should drop
+
     private void Start()
     {
         NextWave();
@@ -34,6 +39,7 @@ public class WaveManager : MonoBehaviour
 
     public void OnWavedFinished()
     {
+        SpawnRewardCrate();
         StartCoroutine(StartWaveCountdown());
     }
 
@@ -44,5 +50,17 @@ public class WaveManager : MonoBehaviour
         yield return new WaitForSeconds(delayNextWave);
         EnemySpawner.instance.StartNextWave();
     }
+
+    private void SpawnRewardCrate()
+    {
+        if (cratePrefab != null)
+        {
+            // If using an object pool for your crates, substitute this Instantiate call 
+            // with your pooling activation logic!
+            Vector3 spawnPos = crateSpawnPoint != null ? crateSpawnPoint.position : transform.position;
+            Instantiate(cratePrefab, spawnPos, Quaternion.identity);
+        }
+    }
+
 
 }

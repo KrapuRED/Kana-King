@@ -3,46 +3,56 @@ using UnityEngine.InputSystem;
 
 public class PlayerInteractSystem : MonoBehaviour
 {
-    [SerializeField] private float interactDistance = 3f;
+    [Header("Interaction Settings")]
+    [SerializeField] private float interactRadius = 2f; // Jarak jangkauan lingkaran
     [SerializeField] private LayerMask interactLayer;
 
-    private Vector2 lastDirection = Vector2.right;
-
-    private RaycastHit2D hit;
+    private Collider2D hitCollider; // Menggantikan RaycastHit2D
     [SerializeField] private GameObject interactIcon;
-
-    public void SetDirection(Vector2 dir)
-    {
-        if (dir != Vector2.zero)
-            lastDirection = dir.normalized;
-    }
 
     private void Update()
     {
-        hit = Physics2D.Raycast(transform.position, lastDirection, interactDistance, interactLayer);
+        // Mendeteksi objek di dalam radius lingkaran dari posisi player
+        hitCollider = Physics2D.OverlapCircle(transform.position, interactRadius, interactLayer);
 
-        if (hit.collider != null)
+        // Mengaktifkan/menonaktifkan ikon interaksi
+        if (interactIcon != null)
         {
-            interactIcon.SetActive(true);
-        }
-        else
-        {
-            interactIcon.SetActive(false);
+            interactIcon.SetActive(hitCollider != null);
         }
     }
 
     public void Interact(InputAction.CallbackContext ctx)
     {
+        // "started" atau "performed" (tanpa hold) akan langsung memicu kode ini begitu tombol ditekan
         if (!ctx.performed) return;
 
-        if (hit.collider != null)
+        if (hitCollider != null)
         {
-            IInteractable interactable = hit.collider.GetComponent<IInteractable>();
+            IInteractable interactable = hitCollider.GetComponent<IInteractable>();
 
             if (interactable != null)
             {
+                Debug.Log("Berhasil Interaksi lewat Lingkaran!");
                 interactable.Interact();
             }
         }
+    }
+
+    // --- VISUALISASI GIZMOS LINGKARAN ---
+    private void OnDrawGizmos()
+    {
+        // Jika mendeteksi objek di dalam area lingkaran
+        if (Application.isPlaying && hitCollider != null)
+        {
+            Gizmos.color = Color.green; // Berubah hijau jika ada objek yang bisa diinteraksi
+        }
+        else
+        {
+            Gizmos.color = Color.red; // Merah jika kosong
+        }
+
+        // Menggambar lingkaran kawat di sekitar Player
+        Gizmos.DrawWireSphere(transform.position, interactRadius);
     }
 }
