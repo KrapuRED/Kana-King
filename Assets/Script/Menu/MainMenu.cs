@@ -7,8 +7,21 @@ public class MainMenu : MonoBehaviour
 
     [SerializeField] private GameObject settingsPanel;
     [SerializeField] private GameObject creditsPanel;
+    [SerializeField] private GameObject characterSelectPanel;
+
+    private void Start()
+    {
+        settingsPanel.SetActive(false);
+        creditsPanel.SetActive(false);
+        characterSelectPanel.SetActive(false);
+    }
 
     public void PlayGame()
+    {
+        characterSelectPanel.SetActive(true);
+    }
+
+    public void StartGame()
     {
         SceneManager.LoadScene(gameSceneName);
     }
