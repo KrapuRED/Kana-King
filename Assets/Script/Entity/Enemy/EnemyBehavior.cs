@@ -11,6 +11,9 @@ public class EnemyBehavior : MonoBehaviour
     [SerializeField] private float attackCooldown = 1f;
     private float lastAttackTime;
 
+    [Header("Reference")]
+    private SpriteRenderer spriteRenderer;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -19,7 +22,7 @@ public class EnemyBehavior : MonoBehaviour
         enemyData = enemy.GetEnemyData();
 
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
-
+        spriteRenderer = GetComponent<SpriteRenderer>();
         if (playerObj != null)
         {
             player = playerObj.transform;
@@ -35,7 +38,10 @@ public class EnemyBehavior : MonoBehaviour
         }
 
         Vector2 direction = ((Vector2)player.position - rb.position).normalized;
-
+        if(spriteRenderer != null)
+        {
+            RotateSprite();
+        }
         rb.linearVelocity = direction * enemyData.speed;
     }
 
@@ -53,6 +59,18 @@ public class EnemyBehavior : MonoBehaviour
                 playerScript.TakeDamage(enemyData.damage);
                 lastAttackTime = Time.time;
             }
+        }
+    }
+
+    private void RotateSprite()
+    {
+        if(rb.linearVelocityX > 0)
+        {
+            spriteRenderer.flipX = true;
+        }
+        else if(rb.linearVelocityX < 0)
+        {
+            spriteRenderer.flipX = false;
         }
     }
 }

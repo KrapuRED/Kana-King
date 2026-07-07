@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
@@ -24,8 +25,8 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private float maxRadius = 15f;
 
     [Header("Enemy")]
-    [SerializeField] private EnemySO normalEnemySO;
-    [SerializeField] private EnemySO bossEnemySO;
+    [SerializeField] private List<EnemySO> normalEnemySO = new();
+    [SerializeField] private List<EnemySO> bossEnemySO = new() ;
     [SerializeField] private int baseSpawning = 20;
     [SerializeField] private float delaySpawning = 0.5f;
 
@@ -88,7 +89,8 @@ public class EnemySpawner : MonoBehaviour
             for (int i = 0; i < spawnCount; i++)
             {
                 Vector2 spawnPosition = GetRandomSpawnPosition2D();
-                Instantiate(normalEnemySO.enemyPrefab, spawnPosition, Quaternion.identity);
+                EnemySO normalSO = RandomizeEnemySpawn(normalEnemySO);
+                Instantiate(normalSO.enemyPrefab, spawnPosition, Quaternion.identity);
             }
 
             yield return new WaitForSeconds(delaySpawning);
@@ -102,7 +104,8 @@ public class EnemySpawner : MonoBehaviour
             yield return new WaitForSeconds(1.5f);
 
             Vector2 bossSpawnPosition = GetRandomSpawnPosition2D();
-            Instantiate(bossEnemySO.enemyPrefab, bossSpawnPosition, Quaternion.identity);
+            EnemySO bossSO = RandomizeEnemySpawn(bossEnemySO);
+            Instantiate(bossSO.enemyPrefab, bossSpawnPosition, Quaternion.identity);
 
             Debug.Log("Boss telah bangkit!");
         }
@@ -126,6 +129,13 @@ public class EnemySpawner : MonoBehaviour
         {
             WaveManager.instance.OnWavedFinished();
         }
+    }
+
+    private EnemySO RandomizeEnemySpawn(List<EnemySO> enemyData)
+    {
+        int totalData = enemyData.Count;
+        int index = Random.Range(0, totalData);
+        return enemyData[index];
     }
 
 

@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 430b2d3d149f2dc4cb3481a3dce780a0, type: 3}
-  m_Name: NormalData
+  m_Name: Pencil
   m_EditorClassIdentifier: 
   maxHealth: 1
-  enemyName: Slime
+  enemyName: Pencil
   damage: 1
   speed: 3
   enemyType: 0
   enemySprite: {fileID: 0}
-  enemyPrefab: {fileID: 5702272981671800703, guid: 80819666c59a583409033941ab040bb0, type: 3}
+  enemyPrefab: {fileID: 1219692086761558427, guid: a944b4fe0c8351441b4208105465a4cc, type: 3}
   exp: 5

@@ -4156,7 +4156,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!212 &978836469
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -7690,8 +7690,12 @@ MonoBehaviour:
   playerLocation: {fileID: 978836470}
   minRadius: 10
   maxRadius: 15
-  normalEnemySO: {fileID: 11400000, guid: 10df6e62c1eab334c82c9e4c8fd36c75, type: 2}
-  bossEnemySO: {fileID: 11400000, guid: 16819d80b869f7340bb9e82840f046be, type: 2}
+  normalEnemySO:
+  - {fileID: 11400000, guid: 10df6e62c1eab334c82c9e4c8fd36c75, type: 2}
+  - {fileID: 11400000, guid: 417b0677c8aed82468c555b75d5c0f68, type: 2}
+  bossEnemySO:
+  - {fileID: 11400000, guid: 7f95eb39642119747aed977442444d03, type: 2}
+  - {fileID: 11400000, guid: 463513e75e3990a46bee0c0633c71190, type: 2}
   baseSpawning: 1
   delaySpawning: 0.5
   minimumSpawnInOneTime: 1

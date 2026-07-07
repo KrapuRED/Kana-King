@@ -13,11 +13,11 @@ public class GameManager : MonoBehaviour
     }
 
 
-    [SerializeField] private GameObject playerPrefab;
+    //[SerializeField] private GameObject playerPrefab;
 
-    public void ChoosePlayer(GameObject player)
-    {
-        playerPrefab = player;
-    }
+    //public void ChoosePlayer(GameObject player)
+    //{
+    //    playerPrefab = player;
+    //}
 
 }
