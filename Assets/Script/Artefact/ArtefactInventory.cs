@@ -27,32 +27,38 @@ public class ArtefactInventory : MonoBehaviour
     [SerializeField] private TMP_Text artefactName;
     [SerializeField] private TMP_Text artefactDescription;
 
-    public void SetUpNewArtefact(ArtefactScript artefact)
+    public void SetUpNewArtefact(ArtefactSO artefact)
     {
-        int x = newArtefactSpawn.childCount;
-        for (int i = x - 1; i >= 0; i--)
+        foreach (Transform child in newArtefactSpawn)
         {
-            Destroy(newArtefactSpawn.GetChild(i).gameObject);
+            Destroy(child.gameObject);
         }
-        GameObject y = Instantiate(newArtefactUIPrefab, newArtefactSpawn);
-        y.GetComponent<ArtefactNewUI>().ArtefactNewSetUp(artefact.artefactSO);
+
+        if (artefact != null)
+        {
+            GameObject y = Instantiate(newArtefactUIPrefab, newArtefactSpawn);
+            y.GetComponent<ArtefactNewUI>().ArtefactNewSetUp(artefact);
+        }
     }
     public void SetUpArtefactInventory()
     {
-        int x = currArtefactSpawn.childCount;
-        for(int i = x-1; i >= 0; i--)
+        foreach (Transform child in currArtefactSpawn)
         {
-            Destroy(currArtefactSpawn.GetChild(i).gameObject);
+            Destroy(child.gameObject);
         }
-        foreach(ArtefactScript arte in ArtefactManager.instance.ReturnCurrentArtefact())
+        foreach (ArtefactData data in ArtefactDatabase.instance.AllArtefact)
         {
-            GameObject y = Instantiate(currentArtefactUIPrefab, currArtefactSpawn);
-            y.GetComponent<ArtefactCurrentUI>().ArtefactCurrentSetUp(arte.artefactSO);
+            if(data.artefactSO != null && data.isActivated)
+            {
+                GameObject y = Instantiate(currentArtefactUIPrefab, currArtefactSpawn);
+                y.GetComponent<ArtefactCurrentUI>().ArtefactCurrentSetUp(data.artefactSO);
+            }
         }
     }
 
     public void OpenArtefactDescription(ArtefactSO artefactSO)
     {
+        if (artefactSO == null) return;
         artefactName.text = artefactSO.artefactName;
         artefactDescription.text = artefactSO.artefactDescription;
     }

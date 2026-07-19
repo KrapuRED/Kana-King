@@ -112,8 +112,10 @@ public class Player : MonoBehaviour, IDamageable
 
 
 
-    public void HealArtefactActivated()
+    public void HealArtefactActivated(float heal)
     {
+        healingAmount = heal;
+
         if (healCoroutine != null)
         {
             StopCoroutine(healCoroutine);

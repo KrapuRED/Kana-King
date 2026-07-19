@@ -1,9 +1,13 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ArtefactManager : MonoBehaviour
 {
     public static ArtefactManager instance;
+
+    [SerializeField] private ArtefactSO newArtefact;
+    public ArtefactSO NewArtefact => newArtefact;
+
+    [SerializeField] private GameObject artefactInventoryPanel;
 
     private void Awake()
     {
@@ -13,92 +17,84 @@ public class ArtefactManager : MonoBehaviour
             Destroy(gameObject);
     }
 
-    [SerializeField] private ArtefactScript newArtefacts;
-    [SerializeField] private List<ArtefactScript> currentArtefacts = new();
-
-    [SerializeField] private GameObject artefactInventoryPanel;
-
 
     private void Start()
     {
-        DeactivateAllArtefact();
-        ActivateAllArtefact();
+        OpenArtefactManager(ArtefactDatabase.instance.ReturnRandomArtefact());
     }
 
-
-    public void OpenArtefactManager(ArtefactScript artefact)
+    public void OpenArtefactManager(ArtefactSO artefact)
     {
         artefactInventoryPanel.SetActive(true);
-        newArtefacts = artefact;
+        newArtefact = artefact;
         ArtefactInventory.instance.SetUpArtefactInventory();
-        ArtefactInventory.instance.SetUpNewArtefact(newArtefacts);
+        ArtefactInventory.instance.SetUpNewArtefact(newArtefact);
         PauseSystem.instance.AddPauseRequest();
     }
 
     public void AddArtefact()
     {
-        if (CheckArtefactInventory())
+        if (CheckArtefactInventorySpace())
         {
-            currentArtefacts.Add(newArtefacts);
+            ArtefactDatabase.instance.ActivatedArtefact(newArtefact);
         }
+        else
+        {
+            Debug.LogWarning("Inventory Penuh! Tidak bisa menambah artefak baru.");
+        }
+
         artefactInventoryPanel.SetActive(false);
-        DeactivateAllArtefact();
-        ActivateAllArtefact();
-        PauseSystem.instance.RemovePauseRequest();
-    }
-    public void StashArtefact()
-    {
-        newArtefacts = null;
-        artefactInventoryPanel.SetActive(false);
-        DeactivateAllArtefact();
-        ActivateAllArtefact();
         PauseSystem.instance.RemovePauseRequest();
     }
 
+    public void StashArtefact()
+    {
+        newArtefact = null;
+        artefactInventoryPanel.SetActive(false);
+        PauseSystem.instance.RemovePauseRequest();
+    }
 
     public void DeleteArtefact(ArtefactSO artefact)
     {
-        foreach(ArtefactScript x in currentArtefacts)
-        {
-            if (x.artefactSO == artefact)
-            {
-                x.ArtefactDeactivated();
-                currentArtefacts.Remove(x);
-                break;
-            }
-        }
+        ArtefactDatabase.instance.DeactivatedArtefact(artefact);
         ArtefactInventory.instance.SetUpArtefactInventory();
     }
 
-    public void ActivateAllArtefact()
+    public void CheckArtefactBuff(ArtefactData artefactData)
     {
-        foreach (var artefact in currentArtefacts)
+        if (artefactData?.artefactSO == null) return;
+
+        switch (artefactData.artefactSO.artefactBuff)
         {
-            artefact.ArtefactActivated();
+            case TypeBuff.RegenHPEachSecond:
+                if (artefactData.isActivated)
+                    Player.instance.HealArtefactActivated(artefactData.artefactSO.buffValue);
+                else
+                    Player.instance.HealArtefactDisable();
+                break;
+
+            case TypeBuff.RegenHPWhenDamaging:
+                if (artefactData.isActivated)
+                    PlayerAttackMelee.instance.AddArtefactBuff(artefactData.artefactSO.buffValue);
+                else
+                    PlayerAttackMelee.instance.RemoveArtefactBuff();
+                break;
+
+            case TypeBuff.IncreaseDamagePercentage:
+                if (artefactData.isActivated)
+                    PlayerStat.instance.AddPercentBuff(StatType.Attack, artefactData.artefactSO.buffValue);
+                else
+                    PlayerStat.instance.RemovePercentBuff(StatType.Attack, artefactData.artefactSO.buffValue);
+                break;
         }
     }
 
-    public void DeactivateAllArtefact()
+    /// <summary>
+    /// Mengecek apakah slot inventory aktif saat ini masih kurang dari batas maksimal (misal: max 3).
+    /// </summary>
+    public bool CheckArtefactInventorySpace()
     {
-        foreach (var artefact in ArtefactDatabase.instance.ReturnAllArtefact())
-        {
-            artefact.ArtefactDeactivated();
-        }
+        // Sekarang memanggil fungsi hitung barunya, bukan menghitung seluruh isi database lagi.
+        return ArtefactDatabase.instance.GetActiveArtefactCount() < 3;
     }
-
-    public bool CheckArtefactInventory()
-    {
-        return currentArtefacts.Count < 3;
-    }
-
-    public List<ArtefactScript> ReturnCurrentArtefact()
-    {
-        return currentArtefacts;
-    }
-
-    public ArtefactScript ReturnNewArtefact()
-    {
-        return newArtefacts;
-    }
-
 }

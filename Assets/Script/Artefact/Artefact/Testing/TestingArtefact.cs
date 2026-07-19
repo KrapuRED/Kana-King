@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class TestingArtefact : MonoBehaviour
 {
-    public ArtefactScript x;
+    public ArtefactSO x;
 
     public void click()
     {

@@ -4914,9 +4914,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27aa90386cd3fb342a8435ce9ec34911, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  newArtefacts: {fileID: 0}
-  currentArtefacts:
-  - {fileID: 2737809577829011812, guid: d4b20949671e9434f9313f29ae7ef9ad, type: 3}
+  newArtefact: {fileID: 0}
   artefactInventoryPanel: {fileID: 814470012}
 --- !u!4 &1206928311
 Transform:
@@ -4946,9 +4944,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allArtefact:
-  - {fileID: 6503001421939480336, guid: e3f17a31434064a449e5e4b5f9dc83f8, type: 3}
-  - {fileID: 2737809577829011812, guid: d4b20949671e9434f9313f29ae7ef9ad, type: 3}
-  - {fileID: 7098885640261899777, guid: 08b83b5de62635941a96c096f4223605, type: 3}
+  - artefactSO: {fileID: 11400000, guid: cab9bc53aa4459b4fb642fb1cc655043, type: 2}
+    isActivated: 1
+  - artefactSO: {fileID: 11400000, guid: 5fb94c27d0685af40bee75364160c05b, type: 2}
+    isActivated: 1
+  - artefactSO: {fileID: 11400000, guid: 213aa823ef345b046ba67e7ef3912688, type: 2}
+    isActivated: 0
 --- !u!1 &1286536620
 GameObject:
   m_ObjectHideFlags: 0
@@ -7716,7 +7717,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2762fdb343bf16d4b9384a99515b45af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wave: 1
+  wave: 4
   delayNextWave: 3
   cratePrefab: {fileID: 166527897780339127, guid: 7410e526a241902498b853e1b142404d, type: 3}
   crateSpawnPoint: {fileID: 978836470}

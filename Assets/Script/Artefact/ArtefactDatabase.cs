@@ -1,75 +1,96 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class ArtefactData
+{
+    public ArtefactSO artefactSO;
+    public bool isActivated;
+}
+
 public class ArtefactDatabase : MonoBehaviour
 {
     public static ArtefactDatabase instance;
 
+    [SerializeField] private List<ArtefactData> allArtefact = new List<ArtefactData>();
+    public List<ArtefactData> AllArtefact => allArtefact;
+
     private void Awake()
     {
-        if(instance == null)
+        if (instance == null)
             instance = this;
         else
             Destroy(gameObject);
     }
 
-    [SerializeField] private List<ArtefactScript> allArtefact;
-    private List<ArtefactScript> currArtefact;
-
-    public ArtefactScript ReturnRandomArtefact()
+    /// <summary>
+    /// Mengembalikan artefak acak dari daftar artefak yang AKTIF.
+    /// </summary>
+    /// <summary>
+    /// Mengembalikan artefak acak dari daftar artefak yang BELUM AKTIF (belum dimiliki/belum terbuka).
+    /// </summary>
+    public ArtefactSO ReturnRandomArtefact()
     {
-        currArtefact = ArtefactManager.instance.ReturnCurrentArtefact();
+        List<ArtefactSO> availableArtefacts = new List<ArtefactSO>();
 
-        if (currArtefact == null || currArtefact.Count == 0)
+        foreach (var artefact in allArtefact)
         {
-            return allArtefact[RandomIndex()];
+            // Kuncinya di sini: mencari yang isActivated == false
+            if (!artefact.isActivated && artefact.artefactSO != null)
+            {
+                availableArtefacts.Add(artefact.artefactSO);
+            }
         }
 
-        //List<ArtefactScript> x = ArtefactDatabase.instance.ReturnCurrentArtefact();
+        // Jaga-jaga kalau semua artefak di database SUDAH diaktifkan semua oleh pemain
+        if (availableArtefacts.Count == 0)
+        {
+            Debug.LogWarning("Semua artefak di database sudah aktif! Tidak ada pilihan tersisa.");
+            return null;
+        }
 
-        List<ArtefactScript> artefactAvailable = new List<ArtefactScript>();
+        // Acak dari list artefak yang masih tersedia
+        int randomIndex = Random.Range(0, availableArtefacts.Count);
+        return availableArtefacts[randomIndex];
+    }
 
+
+    /// <summary>
+    /// Menghitung berapa banyak artefak yang saat ini sedang aktif digunakan pemain.
+    /// </summary>
+    public int GetActiveArtefactCount()
+    {
+        int count = 0;
         foreach (var art in allArtefact)
         {
-            bool alreadyHave = false;
-            foreach (var owned in currArtefact)
-            {
-                if (owned == art)
-                {
-                    alreadyHave = true;
-                    break; // Keluar dari loop kecil jika terbukti sudah punya
-                }
-            }
-
-            // Jika belum punya, berarti ini kandidat suci yang boleh di-gacha
-            if (!alreadyHave)
-            {
-                artefactAvailable.Add(art);
-            }
+            if (art.isActivated) count++;
         }
+        return count;
+    }
 
-        // 4. Jaga-jaga jika semua artefak di database ternyata SUDAH dimiliki player
-        if (artefactAvailable.Count == 0)
+    public void ActivatedArtefact(ArtefactSO artefact)
+    {
+        foreach (ArtefactData art in allArtefact)
         {
-            Debug.LogWarning("Semua artefak di database sudah dimiliki oleh player!");
-            return null; // Mengembalikan null, atau bisa kamu ganti ke 'return allArtefact[RandomIndex()];' jika boleh duplikat saat penuh
+            if (art.artefactSO == artefact)
+            {
+                art.isActivated = true;
+                ArtefactManager.instance.CheckArtefactBuff(art);
+                break;
+            }
         }
-
-        // 5. Acak dan kembalikan salah satu artefak yang tersedia (pasti tidak duplikat)
-        int randomIndexTersedia = Random.Range(0, artefactAvailable.Count);
-        return artefactAvailable[randomIndexTersedia];
     }
 
-
-    private int RandomIndex()
+    public void DeactivatedArtefact(ArtefactSO artefact)
     {
-        return Random.Range(0, allArtefact.Count);
+        foreach (ArtefactData art in allArtefact)
+        {
+            if (art.artefactSO == artefact)
+            {
+                art.isActivated = false;
+                ArtefactManager.instance.CheckArtefactBuff(art);
+                break;
+            }
+        }
     }
-
-
-    public List<ArtefactScript> ReturnAllArtefact()
-    {
-        return allArtefact;
-    }
-        
 }

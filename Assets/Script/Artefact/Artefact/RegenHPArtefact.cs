@@ -9,7 +9,7 @@ public class RegenHPArtefact : ArtefactScript
     protected override void ArtefactActive()
     {
         Debug.Log("Arte regen aktif");
-        Player.instance.HealArtefactActivated();
+        //Player.instance.HealArtefactActivated();
     }
     protected override void ArtefactDisable()
     {
