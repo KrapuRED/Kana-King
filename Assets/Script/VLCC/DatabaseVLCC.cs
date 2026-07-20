@@ -37,4 +37,12 @@ public class DatabaseVLCC : MonoBehaviour
         return null;
     }
 
+    public DataVLCC FindRandomData()
+    {
+        if (data == null || data.Count == 0) return null;
+
+        int randomIndex = Random.Range(0, data.Count);
+        return data[randomIndex];
+    }
+
 }

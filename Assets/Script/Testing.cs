@@ -7,6 +7,6 @@ public class Testing : MonoBehaviour
     public void Test()
     {
         Debug.Log("pp");
-        VLCCManager.instance.SetDuration(duration, testName);
+        //VLCCManager.instance.SetDuration(duration, testName);
     }
 }

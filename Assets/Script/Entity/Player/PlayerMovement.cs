@@ -28,12 +28,12 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector2 direction = moveInput.normalized;
 
-        // 🔥 movement tetap jalan walau dash
+        //  movement tetap jalan walau dash
         Vector2 targetVelocity = direction * speed;
 
         if (dash.IsDashing())
         {
-            // 🔥 blend (jangan override total)
+            //  blend (jangan override total)
             rb.linearVelocity = Vector2.Lerp(rb.linearVelocity, targetVelocity + rb.linearVelocity, 0.2f);
         }
         else

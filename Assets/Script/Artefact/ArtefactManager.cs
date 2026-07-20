@@ -23,10 +23,6 @@ public class ArtefactManager : MonoBehaviour
     }
 
 
-    private void Start()
-    {
-        OpenArtefactManager(ArtefactDatabase.instance.ReturnRandomArtefact());
-    }
 
     public void OpenArtefactManager(ArtefactSO artefact)
     {

@@ -2,10 +2,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+public enum CreateReward
+{
+    Coin,
+    Exp,
+    Artefact
+}
+
+
 [System.Serializable]
 public class CrateFill
 {
-    public GameObject itemFil;
+    public CreateReward itemFil;
     public float itemDropChance;
 }
 
@@ -13,9 +21,18 @@ public class CrateFill
 public class CrateScript : MonoBehaviour, IInteractable
 {
 
-    [SerializeField] private List<CrateFill> itemDrop;
+    [SerializeField] private List<CrateFill> itemDrops;
     [SerializeField] private Transform playerLocation;
     bool canInteract;
+
+    [Header("VLCC Setting")]
+    [SerializeField] private float duration;
+
+    [Header("Reward Setting")]
+    private CreateReward itemDrop;
+    [SerializeField] private int coinDrop;
+    [SerializeField] private float expDrop;
+
 
 
     private void Awake()
@@ -48,41 +65,66 @@ public class CrateScript : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        if(!canInteract) return;
-        //CrateFill chosenItem = GetRandomCrateFill();
+        if (!canInteract) return;
+        canInteract = false;
 
-        //if (chosenItem != null && chosenItem.itemFil != null)
-        //{
-        //    Instantiate(chosenItem.itemFil, transform.position, Quaternion.identity);
-        //}
+        // 1. Tentukan drop acak SEBELUM data dihancurkan/dimatikan
+        CrateFill selectedDrop = GetRandomCrateFill();
+        CreateReward rewardType = selectedDrop != null ? selectedDrop.itemFil : CreateReward.Coin;
+
+        // 2. Cache data hadiah ke variabel lokal agar tidak hilang saat objek hancur
+        int finalCoin = coinDrop;
+        float finalExp = expDrop;
+
+        // 3. Daftarkan fungsi anonim dengan data ter-cache agar eksekusi pasca-hancur tetap aman
+        VLCCManager.instance.VLCCReward += () =>
+        {
+            ExecuteReward(rewardType, finalCoin, finalExp);
+        };
+
+        VLCCManager.instance.SetDuration(duration);
+
+        // 4. Nonaktifkan visual & interaksi peti, kemudian hancurkan objek
+        GetComponent<Collider2D>().enabled = false;
+        if (TryGetComponent<SpriteRenderer>(out var sr)) sr.enabled = false;
+
         Destroy(gameObject);
     }
 
-    // Renamed to follow standard C# naming conventions (PascalCase for methods)
     public CrateFill GetRandomCrateFill()
     {
-        if (itemDrop == null || itemDrop.Count == 0) return null;
+        if (itemDrops == null || itemDrops.Count == 0) return null;
 
-        // 2. Must initialize 'total' to 0
         float total = 0f;
-        foreach (var item in itemDrop)
+        foreach (var item in itemDrops)
         {
             total += item.itemDropChance;
         }
 
-        // 3. Roll a random number between 0 and your total weight
         float randomRoll = Random.Range(0f, total);
-
-        foreach (var item in itemDrop)
+        foreach (var item in itemDrops)
         {
             randomRoll -= item.itemDropChance;
-            if (randomRoll <= 0)
-            {
-                return item;
-            }
+            if (randomRoll <= 0) return item;
         }
 
-        // Fallback (just in case of weird floating-point precision issues)
-        return itemDrop[itemDrop.Count - 1];
+        return itemDrops[itemDrops.Count - 1];
+    }
+
+    // Fungsi eksekusi utama yang menerima parameter aman mandiri
+    private static void ExecuteReward(CreateReward type, int coins, float exp)
+    {
+        switch (type)
+        {
+            case CreateReward.Coin:
+                PlayerStat.instance.AddCoin(coins);
+                break;
+            case CreateReward.Exp:
+                Player.instance.AddExp(exp);
+                break;
+            case CreateReward.Artefact:
+                ArtefactManager.instance.OpenArtefactManager(ArtefactDatabase.instance.ReturnRandomArtefact());
+                break;
+        }
     }
 }

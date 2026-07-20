@@ -2,6 +2,7 @@ using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
 using System.Collections;
+using System;
 
 public class VLCCManager : MonoBehaviour
 {
@@ -26,6 +27,9 @@ public class VLCCManager : MonoBehaviour
 
     public bool onVLCC = false;
 
+
+    public event Action VLCCReward;
+
     private void Update()
     {
         if (onVLCC)
@@ -47,24 +51,51 @@ public class VLCCManager : MonoBehaviour
     {
         return duration;
     }
-    public void SetDuration(float x, string name)
+
+    public void SetDuration(float x)
     {
         if (!onVLCC)
         {
-            SetUpVLCC(name);
+            SetUpVLCC();
             duration = x;
         }
     }
 
-    public void SetUpVLCC(string name)
+    public void SetUpVLCC()
     {
         onVLCC = true;
+        romajiOrder.Clear(); // Pastikan order bersih sebelum diisi baru
+
         VLCCUi.instance.SetUpVLCCPanel();
-        dataVLCC = DatabaseVLCC.instance.FindData(name);
-        SetUpKatakana();
-        SetUpRomaji();
+        dataVLCC = DatabaseVLCC.instance.FindRandomData();
+
+        if (dataVLCC != null)
+        {
+            SetUpKatakana();
+            SetUpRomaji();
+        }
+
         PauseSystem.instance.AddPauseRequest();
     }
+
+    //public void SetDuration(float x, string name)
+    //{
+    //    if (!onVLCC)
+    //    {
+    //        SetUpVLCC(name);
+    //        duration = x;
+    //    }
+    //}
+
+    //public void SetUpVLCC(string name)
+    //{
+    //    onVLCC = true;
+    //    VLCCUi.instance.SetUpVLCCPanel();
+    //    dataVLCC = DatabaseVLCC.instance.FindData(name);
+    //    SetUpKatakana();
+    //    SetUpRomaji();
+    //    PauseSystem.instance.AddPauseRequest();
+    //}
 
     public void SetUpKatakana()
     {
@@ -124,6 +155,8 @@ public class VLCCManager : MonoBehaviour
         VLCCUi.instance.SetUpVLCCPanel();
         romajiOrder.Clear();
         VLCCUi.instance.DeleteAll();
+
+        VLCCReward = null;
         PauseSystem.instance.RemovePauseRequest();
     }
 
@@ -139,7 +172,8 @@ public class VLCCManager : MonoBehaviour
     public void VLCCComplete()
     {
         Debug.Log("Berhasil");
-        ArtefactManager.instance.OpenArtefactManager(ArtefactDatabase.instance.ReturnRandomArtefact());
+        VLCCReward?.Invoke();
+        //ArtefactManager.instance.OpenArtefactManager(ArtefactDatabase.instance.ReturnRandomArtefact());
         StartCoroutine(ResetVLCC());
 
     }

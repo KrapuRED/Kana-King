@@ -31,6 +31,10 @@ public class ArtefactInventory : MonoBehaviour
     [Header("Screen")]
     [SerializeField] private List<Image> artefactImages = new List<Image>();
 
+    private void Start()
+    {
+        SetUpArtefactInventory();
+    }
     public void SetUpNewArtefact(ArtefactSO artefact)
     {
         foreach (Transform child in newArtefactSpawn)

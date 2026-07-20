@@ -1704,12 +1704,12 @@ MonoBehaviour:
   - english: katakana
     katakana: "\u30AB\u30BF\u30AB\u30CA"
     romaji: ka ta ka na
-  - english: sdsds
-    katakana: sdds
-    romaji: sdsds
-  - english: adsad
-    katakana: dadad
-    romaji: adad
+  - english: katakana
+    katakana: "\u30AB\u30BF\u30AB\u30CA"
+    romaji: ka ta ka na
+  - english: katakana
+    katakana: "\u30AB\u30BF\u30AB\u30CA"
+    romaji: ka ta ka na
 --- !u!114 &319316729
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -101,8 +101,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7403e5b5c6d9b0941943bdb30f578b79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemDrop: []
+  itemDrops:
+  - itemFil: 0
+    itemDropChance: 70
+  - itemFil: 0
+    itemDropChance: 20
+  - itemFil: 2
+    itemDropChance: 5
   playerLocation: {fileID: 0}
+  duration: 6
+  testName: 
+  coinDrop: 5
+  expDrop: 5
 --- !u!61 &9185815255162741899
 BoxCollider2D:
   m_ObjectHideFlags: 0

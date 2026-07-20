@@ -56,7 +56,9 @@ public class Enemy : MonoBehaviour, IDamageable
 
         if(enemyData.enemyType == EnemyType.Boss)
         {
-            VLCCManager.instance.SetDuration(duration, testName);
+            VLCCManager.instance.VLCCReward += BossReward;
+            //VLCCManager.instance.SetDuration(duration, testName);
+            VLCCManager.instance.SetDuration(duration);
         }
 
 
@@ -66,5 +68,10 @@ public class Enemy : MonoBehaviour, IDamageable
     public EnemySO GetEnemyData()
     {
         return enemyData;
+    }
+
+    private void BossReward()
+    {
+        ArtefactManager.instance.OpenArtefactManager(ArtefactDatabase.instance.ReturnRandomArtefact());
     }
 }
