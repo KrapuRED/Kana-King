@@ -75,6 +75,7 @@ public class ArtefactDatabase : MonoBehaviour
             if (art.artefactSO == artefact)
             {
                 art.isActivated = true;
+
                 ArtefactManager.instance.CheckArtefactBuff(art);
                 break;
             }
@@ -88,9 +89,11 @@ public class ArtefactDatabase : MonoBehaviour
             if (art.artefactSO == artefact)
             {
                 art.isActivated = false;
+
                 ArtefactManager.instance.CheckArtefactBuff(art);
                 break;
             }
         }
     }
+
 }

@@ -1,6 +1,7 @@
+using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class ArtefactInventory : MonoBehaviour
 {
@@ -27,6 +28,9 @@ public class ArtefactInventory : MonoBehaviour
     [SerializeField] private TMP_Text artefactName;
     [SerializeField] private TMP_Text artefactDescription;
 
+    [Header("Screen")]
+    [SerializeField] private List<Image> artefactImages = new List<Image>();
+
     public void SetUpNewArtefact(ArtefactSO artefact)
     {
         foreach (Transform child in newArtefactSpawn)
@@ -46,12 +50,35 @@ public class ArtefactInventory : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
-        foreach (ArtefactData data in ArtefactDatabase.instance.AllArtefact)
+
+        // 2. Sembunyikan semua slot gambar di HUD layar utama terlebih dahulu
+        foreach (Image image in artefactImages)
         {
-            if(data.artefactSO != null && data.isActivated)
+            if (image != null)
             {
+                image.sprite = null;
+                image.enabled = false;
+            }
+        }
+
+        int index = 0;
+
+        // 3. Tampilkan ulang visual berdasarkan list artefak aktif saat ini
+        foreach (ArtefactSO artefactSO in ArtefactManager.instance.CurrArtefact)
+        {
+            if (artefactSO != null)
+            {
+                // A. Buat item di dalam Grid Inventory
                 GameObject y = Instantiate(currentArtefactUIPrefab, currArtefactSpawn);
-                y.GetComponent<ArtefactCurrentUI>().ArtefactCurrentSetUp(data.artefactSO);
+                y.GetComponent<ArtefactCurrentUI>().ArtefactCurrentSetUp(artefactSO);
+
+                // B. Perbarui gambar slot HUD layar utama sesuai index list yang rapat kiri
+                if (index < artefactImages.Count)
+                {
+                    artefactImages[index].sprite = artefactSO.artefactSprite;
+                    artefactImages[index].enabled = true;
+                    index++;
+                }
             }
         }
     }

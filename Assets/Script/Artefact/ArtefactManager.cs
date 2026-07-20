@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ArtefactManager : MonoBehaviour
@@ -6,6 +7,10 @@ public class ArtefactManager : MonoBehaviour
 
     [SerializeField] private ArtefactSO newArtefact;
     public ArtefactSO NewArtefact => newArtefact;
+
+
+    [SerializeField] private List<ArtefactSO> currArtefact = new List<ArtefactSO>();
+    public List<ArtefactSO> CurrArtefact => currArtefact;
 
     [SerializeField] private GameObject artefactInventoryPanel;
 
@@ -37,12 +42,13 @@ public class ArtefactManager : MonoBehaviour
         if (CheckArtefactInventorySpace())
         {
             ArtefactDatabase.instance.ActivatedArtefact(newArtefact);
+            currArtefact.Add(newArtefact);
         }
         else
         {
             Debug.LogWarning("Inventory Penuh! Tidak bisa menambah artefak baru.");
         }
-
+        ArtefactInventory.instance.SetUpArtefactInventory();
         artefactInventoryPanel.SetActive(false);
         PauseSystem.instance.RemovePauseRequest();
     }
@@ -56,7 +62,10 @@ public class ArtefactManager : MonoBehaviour
 
     public void DeleteArtefact(ArtefactSO artefact)
     {
+        if (artefact == null) return;
+
         ArtefactDatabase.instance.DeactivatedArtefact(artefact);
+        currArtefact.Remove(artefact);
         ArtefactInventory.instance.SetUpArtefactInventory();
     }
 
