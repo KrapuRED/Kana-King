@@ -1,30 +1,59 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+
 public class PlayerMovement : MonoBehaviour
 {
-    private Rigidbody2D _rb2d;
-    public float speed;
+    private Rigidbody2D rb;
+    public float speed = 6f;
+
     [SerializeField] private Animator animator;
 
-    private void Start()
+    private PlayerDash dash;
+
+    private Vector2 moveInput;
+
+    private void Awake()
     {
-        _rb2d = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
+        dash = GetComponent<PlayerDash>();
+    }
+
+    // NEW INPUT SYSTEM (Vector2)
+    public void OnMove(InputAction.CallbackContext context)
+    {
+        moveInput = context.ReadValue<Vector2>();
+    }
+
+    private void FixedUpdate()
+    {
+        Vector2 direction = moveInput.normalized;
+
+        // 🔥 movement tetap jalan walau dash
+        Vector2 targetVelocity = direction * speed;
+
+        if (dash.IsDashing())
+        {
+            // 🔥 blend (jangan override total)
+            rb.linearVelocity = Vector2.Lerp(rb.linearVelocity, targetVelocity + rb.linearVelocity, 0.2f);
+        }
+        else
+        {
+            rb.linearVelocity = targetVelocity;
+        }
+
+        dash.SetMoveDirection(direction);
+
+        animator.SetFloat("velocity", rb.linearVelocity.magnitude);
+
+        // flip karakter
+        if (rb.linearVelocity.x < -0.1f)
+            transform.localRotation = Quaternion.Euler(0, 180, 0);
+        else if (rb.linearVelocity.x > 0.1f)
+            transform.localRotation = Quaternion.Euler(0, 0, 0);
     }
 
     public void OnMovementPlayer(float dirX, float dirY)
     {
-        Vector2 direction = new Vector2(dirX, dirY).normalized;
-        _rb2d.linearVelocity = direction * speed;
-        animator.SetFloat("velocity", _rb2d.linearVelocity.magnitude);
-        if (_rb2d.linearVelocity.x < -0.1f)
-        {
-            // Menghadap Kiri: Putar Y sebesar 180 derajat
-            transform.localRotation = Quaternion.Euler(0, 180, 0);
-        }
-        else if (_rb2d.linearVelocity.x > 0.1f)
-        {
-            // Menghadap Kanan: Kembalikan Y ke 0 derajat
-            transform.localRotation = Quaternion.Euler(0, 0, 0);
-        }
+        moveInput = new Vector2(dirX, dirY);
     }
 }
