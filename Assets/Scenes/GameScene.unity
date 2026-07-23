@@ -8143,6 +8143,7 @@ MonoBehaviour:
   bossEnemySO:
   - {fileID: 11400000, guid: 7f95eb39642119747aed977442444d03, type: 2}
   - {fileID: 11400000, guid: 463513e75e3990a46bee0c0633c71190, type: 2}
+  - {fileID: 11400000, guid: f7de030e750081d4d94f16c491a705fe, type: 2}
   baseSpawning: 1
   delaySpawning: 0.5
   minimumSpawnInOneTime: 1
