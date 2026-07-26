@@ -2830,7 +2830,7 @@ MonoBehaviour:
   - statType: 1
     baseValue: 2
   - statType: 2
-    baseValue: 500
+    baseValue: 10
   - statType: 3
     baseValue: 2
   - statType: 4

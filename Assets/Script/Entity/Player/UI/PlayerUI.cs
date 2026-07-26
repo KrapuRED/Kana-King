@@ -18,6 +18,11 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] private Slider healthBar;
     [SerializeField] private TMP_Text healthText;
 
+
+    private void Start()
+    {
+        HealthUISetUp();
+    }
     public void HealthUISetUp()
     {
         healthBar.minValue = 0f;
