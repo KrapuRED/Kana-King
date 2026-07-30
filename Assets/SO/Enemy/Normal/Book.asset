@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 430b2d3d149f2dc4cb3481a3dce780a0, type: 3}
   m_Name: Book
   m_EditorClassIdentifier: 
-  maxHealth: 1
+  maxHealth: 3
   enemyName: Pencil
-  damage: 1
+  damage: 2
   speed: 3
   enemyType: 0
   enemySprite: {fileID: 0}
   enemyPrefab: {fileID: 616919183681599384, guid: 98fc228a1e49ffc44a149eb5a3ebfd50, type: 3}
-  exp: 1
+  exp: 3

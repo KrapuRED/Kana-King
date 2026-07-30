@@ -23,7 +23,8 @@ public class Enemy : MonoBehaviour, IDamageable
     private void Awake()
     {
         currentHealth = enemyData.maxHealth;
-        currentHealth += WaveManager.instance.ReturnWave() / 3;
+        int n = WaveManager.instance.ReturnWave();
+        currentHealth += (2*(n / 4) + (n/4)*(n-4*(n / 4) + 1));
         coinDrop = ((int)currentHealth);
         expDrop = currentHealth;
         //SpriteRenderer sr = GetComponent<SpriteRenderer>();

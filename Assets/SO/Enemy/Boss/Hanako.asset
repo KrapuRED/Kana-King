@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 430b2d3d149f2dc4cb3481a3dce780a0, type: 3}
   m_Name: Hanako
   m_EditorClassIdentifier: 
-  maxHealth: 1
+  maxHealth: 6
   enemyName: Hanako
-  damage: 1
+  damage: 3
   speed: 2
   enemyType: 1
   enemySprite: {fileID: 0}

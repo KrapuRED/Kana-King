@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Player SO1
   m_EditorClassIdentifier: 
   characterName: SwordMaster
-  characterSprite: {fileID: 0}
+  characterSprite: {fileID: -1631017502767035647, guid: 85677428737eaff44b08e1fe3888f4c8, type: 3}
   description: akjsdhjsahdjhsajdhasd
   baseStatDatas: []
   playerGameObject: {fileID: 0}

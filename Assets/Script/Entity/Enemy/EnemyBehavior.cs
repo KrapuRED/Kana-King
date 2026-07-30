@@ -56,7 +56,7 @@ public class EnemyBehavior : MonoBehaviour
 
             if (playerScript != null)
             {
-                playerScript.TakeDamage(enemyData.damage);
+                playerScript.TakeDamage(TotalEnemyDamage());
                 lastAttackTime = Time.time;
             }
         }
@@ -73,4 +73,13 @@ public class EnemyBehavior : MonoBehaviour
             spriteRenderer.flipX = false;
         }
     }
+
+    private int TotalEnemyDamage()
+    {
+        int n = WaveManager.instance.ReturnWave();
+        int damage = enemyData.damage;
+        damage += (n + 2) / 2;
+        return damage;
+    }
+
 }
