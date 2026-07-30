@@ -19,4 +19,4 @@ MonoBehaviour:
   enemyType: 0
   enemySprite: {fileID: 0}
   enemyPrefab: {fileID: 1219692086761558427, guid: a944b4fe0c8351441b4208105465a4cc, type: 3}
-  exp: 5
+  exp: 1

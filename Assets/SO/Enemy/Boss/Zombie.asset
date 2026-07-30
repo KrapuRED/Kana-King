@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 430b2d3d149f2dc4cb3481a3dce780a0, type: 3}
   m_Name: Zombie
   m_EditorClassIdentifier: 
-  maxHealth: 5
+  maxHealth: 1
   enemyName: Zombie
-  damage: 3
+  damage: 1
   speed: 2
   enemyType: 1
   enemySprite: {fileID: 0}
   enemyPrefab: {fileID: 1939519503458012187, guid: 42f232a0fce2a9f4594e4fa3e16b2215, type: 3}
-  exp: 10
+  exp: 1

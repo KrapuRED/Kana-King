@@ -22,7 +22,7 @@ public class LoseScript : MonoBehaviour
     public void ExitGame()
     {
         PauseSystem.instance.RemovePauseRequest();
-        SceneController.instance.ReloadScene();
+        SceneController.instance.MainMenuScene();
     }
 
 }

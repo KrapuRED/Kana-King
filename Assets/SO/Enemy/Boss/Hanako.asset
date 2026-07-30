@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 430b2d3d149f2dc4cb3481a3dce780a0, type: 3}
   m_Name: Hanako
   m_EditorClassIdentifier: 
-  maxHealth: 5
+  maxHealth: 1
   enemyName: Hanako
-  damage: 3
+  damage: 1
   speed: 2
   enemyType: 1
   enemySprite: {fileID: 0}
   enemyPrefab: {fileID: 1939519503458012187, guid: 9136f577aa115e744b76d2b2e097815c, type: 3}
-  exp: 10
+  exp: 1

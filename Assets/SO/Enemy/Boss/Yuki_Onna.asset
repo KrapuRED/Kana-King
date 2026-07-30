@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 430b2d3d149f2dc4cb3481a3dce780a0, type: 3}
   m_Name: Yuki_Onna
   m_EditorClassIdentifier: 
-  maxHealth: 5
+  maxHealth: 1
   enemyName: Yuki_Onna
-  damage: 3
+  damage: 1
   speed: 2
   enemyType: 1
   enemySprite: {fileID: 0}
   enemyPrefab: {fileID: 1939519503458012187, guid: fd23a6bf4d16c1c44b92a026df1402a4, type: 3}
-  exp: 10
+  exp: 1
