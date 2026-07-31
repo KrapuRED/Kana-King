@@ -18,7 +18,7 @@ public class VLCCManager : MonoBehaviour
     }
 
 
-    [SerializeField] private float duration = 5f;
+    [SerializeField] private float duration = 7f;
 
     [SerializeField] private DataVLCC dataVLCC;
     [SerializeField] private VLCCUi vlccUI;

@@ -91,7 +91,8 @@ public class EnemySpawner : MonoBehaviour
             {
                 Vector2 spawnPosition = GetRandomSpawnPosition2D();
                 EnemySO normalSO = RandomizeEnemySpawn(normalEnemySO);
-                Instantiate(normalSO.enemyPrefab, spawnPosition, Quaternion.identity);
+                GameObject x = Instantiate(normalSO.enemyPrefab, spawnPosition, Quaternion.identity);
+                x.GetComponent<Enemy>().InitEnemy();
             }
 
             yield return new WaitForSeconds(delaySpawning);

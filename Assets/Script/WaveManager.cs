@@ -34,6 +34,7 @@ public class WaveManager : MonoBehaviour
 
     public int ReturnWave()
     {
+        Debug.Log("apopopop");
         return wave;
     }
 
@@ -46,8 +47,8 @@ public class WaveManager : MonoBehaviour
 
     IEnumerator StartWaveCountdown()
     {
-        wave++;
         yield return new WaitForSeconds(delayNextWave);
+        wave++;
         EnemySpawner.instance.StartNextWave();
     }
 

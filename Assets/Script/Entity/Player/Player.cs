@@ -107,7 +107,8 @@ public class Player : MonoBehaviour, IDamageable
     public void OnLevelUp()
     {
         level++;
-        maxPlayerExp += (30 + (level * 15));
+        //maxPlayerExp += (30 + (level * 15));
+        maxPlayerExp = (30 + (level * 15));
         PlayerUI.instance.HealthUISetUp();
         ShopManager.instance.OpenShop();
     }

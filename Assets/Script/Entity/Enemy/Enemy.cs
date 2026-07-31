@@ -17,22 +17,28 @@ public class Enemy : MonoBehaviour, IDamageable
 
     [Header("VLCC")]
     [SerializeField] private string testName;
-    [SerializeField] private float duration = 5f;
+    [SerializeField] private float duration = 7f;
 
+    private int n;
 
-    private void Awake()
+    private void Start()
     {
-        currentHealth = enemyData.maxHealth;
-        int n = WaveManager.instance.ReturnWave();
-        currentHealth += (2*(n / 4) + (n/4)*(n-4*(n / 4) + 1));
-        coinDrop = ((int)currentHealth);
-        expDrop = currentHealth;
-        //SpriteRenderer sr = GetComponent<SpriteRenderer>();
+        InitEnemy();
+    }
 
-        //if (sr != null)
-        //{
-        //    sr.sprite = enemyData.enemySprite;
-        //}
+    public void InitEnemy()
+    {
+        Debug.Log("Enemy Spawned / Re-activated");
+        currentHealth = enemyData.maxHealth;
+
+        n = WaveManager.instance.ReturnWave();
+        if (n > 1)
+        {
+            currentHealth = Mathf.CeilToInt(2f * (n / 4f) + (n / 4f) * (n - 4f * (n / 4f) + 1f));
+        }
+
+        coinDrop = (int)currentHealth;
+        expDrop = currentHealth;
     }
 
     public void TakeDamage(float damage)
@@ -50,9 +56,9 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         Debug.Log(enemyData.enemyName + " Die");
         PlayerStat.instance.AddCoin(coinDrop);
-
-        GameObject x = Instantiate(expPrefab, transform.position, Quaternion.identity);
-        x.GetComponent<ExpScript>().SetEXPValue(expDrop);
+        Player.instance.AddExp(expDrop);
+        //GameObject x = Instantiate(expPrefab, transform.position, Quaternion.identity);
+        //x.GetComponent<ExpScript>().SetEXPValue(expDrop);
         EnemySpawner.instance.EnemyDeathCount();
 
         if(enemyData.enemyType == EnemyType.Boss)

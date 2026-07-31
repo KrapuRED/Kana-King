@@ -78,7 +78,9 @@ public class EnemyBehavior : MonoBehaviour
     {
         int n = WaveManager.instance.ReturnWave();
         int damage = enemyData.damage;
-        damage += (n + 2) / 2;
+        if(n > 1)
+            damage = Mathf.CeilToInt((n + 2) / 2);
+        Debug.Log($"damage = {damage}");
         return damage;
     }
 
