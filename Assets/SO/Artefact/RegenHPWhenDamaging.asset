@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c18a87d2e3460e459f691159a1649ea, type: 3}
   m_Name: RegenHPWhenDamaging
   m_EditorClassIdentifier: 
-  artefactName: RegenHPWhenDamaging
+  artefactName: Knight's Sheath
   artefactSprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  artefactDescription: RegenHPWhenDamaging
+  artefactDescription: A legendary sheath that slowly restores the swordsman's vitality
+    while in battle.
   artefactBuff: 1
   buffValue: 30
