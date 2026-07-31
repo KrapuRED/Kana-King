@@ -18,10 +18,13 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] private Slider healthBar;
     [SerializeField] private TMP_Text healthText;
 
+    [Header("Experience")]
+    [SerializeField] private Slider expBar;
 
     private void Start()
     {
         HealthUISetUp();
+        ExperienceUISetUp();
     }
     public void HealthUISetUp()
     {
@@ -34,5 +37,14 @@ public class PlayerUI : MonoBehaviour
         healthBar.value = Player.instance.CurrentHealth;
 
         healthText.text = $"{healthBar.value.ToString()}/{healthBar.maxValue.ToString()}";
+    }
+
+    public void ExperienceUISetUp()
+    {
+        expBar.minValue = 0f;
+
+        expBar.maxValue = Player.instance.MaxPlayerExp;
+
+        expBar.value = Player.instance.CurrentPlayerExp;
     }
 }

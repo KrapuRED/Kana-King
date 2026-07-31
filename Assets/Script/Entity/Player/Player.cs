@@ -27,7 +27,9 @@ public class Player : MonoBehaviour, IDamageable
 
     [Header("EXP & LEVEL")]
     [SerializeField] private float currPlayerExp;
+    public float CurrentPlayerExp => currPlayerExp;
     [SerializeField] private float maxPlayerExp;
+    public float MaxPlayerExp => maxPlayerExp;
     [SerializeField] private int level;
 
 
@@ -95,11 +97,14 @@ public class Player : MonoBehaviour, IDamageable
             currPlayerExp -= maxPlayerExp;
             OnLevelUp();
         }
+        PlayerUI.instance.ExperienceUISetUp();
     }
 
     public void OnLevelUp()
     {
         level++;
+        maxPlayerExp += (30 + (level * 15));
+        PlayerUI.instance.HealthUISetUp();
         ShopManager.instance.OpenShop();
     }
 
