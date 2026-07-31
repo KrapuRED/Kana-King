@@ -19,6 +19,7 @@ public class ItemShopPrefab : MonoBehaviour
     {
         itemShop = shopSO;
         itemName.text = itemShop.name;
+        itemIcon.sprite = itemShop.statIcon;
         itemType.text = itemShop.statType.ToString();
         itemDescription.text = itemShop.statDescription;
         price = itemShop.itemPrice;

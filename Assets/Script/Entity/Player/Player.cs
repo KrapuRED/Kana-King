@@ -55,7 +55,11 @@ public class Player : MonoBehaviour, IDamageable
 
     public void TakeDamage(float damage)
     {
-        currentHealth -= damage;
+        float finalDamage = damage - StatCalculationManager.instance.DefendDamage();
+        if (finalDamage < 0)
+            finalDamage = 0;
+
+        currentHealth -= finalDamage;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
 
         cinemachineImpulseSource.GenerateImpulse();

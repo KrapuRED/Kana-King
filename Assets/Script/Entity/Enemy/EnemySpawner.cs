@@ -40,7 +40,8 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private int totalEnemyDefeated = 0;
     [SerializeField] private bool bossWave = false;
 
-
+    [Header("Reference")]
+    [SerializeField] private BossNotification bossNotification;
 
 
     private Coroutine spawnCoroutine;
@@ -100,6 +101,7 @@ public class EnemySpawner : MonoBehaviour
         // Jika ini adalah wave boss, spawn boss-nya sekarang!
         if (bossWave)
         {
+            bossNotification.PlayBossNotification();
             // Beri sedikit jeda dramatis sebelum boss muncul (opsional)
             yield return new WaitForSeconds(1.5f);
 

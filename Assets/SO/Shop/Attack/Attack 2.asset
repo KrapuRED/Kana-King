@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a08e0c4a98559243bb41e68f6d8c43a, type: 3}
   m_Name: Attack 2
   m_EditorClassIdentifier: 
-  statIcon: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  statIcon: {fileID: 6383903053851653288, guid: 2225b0fe18536974c80d887d68d8d296, type: 3}
   statName: Attack
   statType: 0
   statDescription: attack +20%
