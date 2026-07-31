@@ -84,7 +84,18 @@ public class Player : MonoBehaviour, IDamageable
         }
         PlayerUI.instance.HealthUISetUp();
     }
+    public void HealingMaxHp(float percentAmount)
+    {
+        float totalHeal = maxHealth * (percentAmount / 100f);
+        currentHealth += totalHeal;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
 
+        if (currentHealth > maxHealth)
+        {
+            currentHealth = maxHealth;
+        }
+        PlayerUI.instance.HealthUISetUp();
+    }
 
     private void Die()
     {

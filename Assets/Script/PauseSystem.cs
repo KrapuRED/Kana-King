@@ -37,6 +37,7 @@ public class PauseSystem : MonoBehaviour
             {
                 // Buka pause menu utama
                 pauseMenuPanel.SetActive(true);
+                PlayerUI.instance.StatUISetUp();
                 AddPauseRequest();
             }
         }

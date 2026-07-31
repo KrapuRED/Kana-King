@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7a08e0c4a98559243bb41e68f6d8c43a, type: 3}
-  m_Name: Attack 1
+  m_Name: Healing 1
   m_EditorClassIdentifier: 
-  statIcon: {fileID: 6383903053851653288, guid: 2225b0fe18536974c80d887d68d8d296, type: 3}
-  statName: Iron Sword
-  statType: 0
-  statDescription: +2 ATK, -55 coin
-  itemPrice: 55
-  modifierType: 0
-  modifierValue: 2
+  statIcon: {fileID: -7432856854672855184, guid: 36e7cfe79bc6ca94786d41824aa764a7, type: 3}
+  statName: Healing potion
+  statType: 6
+  statDescription: Heal 10% HP, -65 coin
+  itemPrice: 65
+  modifierType: 1
+  modifierValue: 10

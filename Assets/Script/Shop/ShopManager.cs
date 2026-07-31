@@ -89,14 +89,24 @@ public class ShopManager : MonoBehaviour
         switch (shopData.modifierType)
         {
             case ShopModifierType.Flat:
-
+                if(shopData.statType == StatType.Healing)
+                {
+                    Player.instance.Healing(shopData.modifierValue);
+                    break;
+                }
                 PlayerStat.instance.AddFlatBuff(shopData.statType, shopData.modifierValue);
+                PlayerUI.instance.HealthUISetUp();
+                PlayerUI.instance.StatUISetUp();
                 break;
 
             case ShopModifierType.Percentage:
-
+                if (shopData.statType == StatType.Healing)
+                {
+                    Player.instance.HealingMaxHp(shopData.modifierValue);
+                    break;
+                }
                 PlayerStat.instance.AddPercentBuff(shopData.statType, shopData.modifierValue / 100f);
-
+                PlayerUI.instance.StatUISetUp();
                 break;
         }
     }

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: RegenHPWhenDamaging
   m_EditorClassIdentifier: 
   artefactName: Knight's Sheath
-  artefactSprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  artefactSprite: {fileID: -931638808115187710, guid: 36e7cfe79bc6ca94786d41824aa764a7, type: 3}
   artefactDescription: A legendary sheath that slowly restores the swordsman's vitality
     while in battle.
   artefactBuff: 1

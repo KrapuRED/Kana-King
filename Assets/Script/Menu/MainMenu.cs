@@ -7,6 +7,7 @@ public class MainMenu : MonoBehaviour
 
     [SerializeField] private GameObject settingsPanel;
     [SerializeField] private GameObject creditsPanel;
+    [SerializeField] private GameObject vocabPanel;
     [SerializeField] private GameObject characterSelectPanel;
 
     private void Start()
@@ -14,6 +15,7 @@ public class MainMenu : MonoBehaviour
         settingsPanel.SetActive(false);
         creditsPanel.SetActive(false);
         characterSelectPanel.SetActive(false);
+        vocabPanel.SetActive(false);
     }
 
     public void PlayGame()
@@ -30,7 +32,10 @@ public class MainMenu : MonoBehaviour
     {
         settingsPanel.SetActive(true);
     }
-
+    public void OpenVocab()
+    {
+        vocabPanel.SetActive(!vocabPanel.activeSelf);
+    }
     public void CloseSettings()
     {
         settingsPanel.SetActive(false);

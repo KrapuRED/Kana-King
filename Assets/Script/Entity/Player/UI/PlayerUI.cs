@@ -21,6 +21,12 @@ public class PlayerUI : MonoBehaviour
     [Header("Experience")]
     [SerializeField] private Slider expBar;
 
+    [Header("Stat")]
+    [SerializeField] private TMP_Text healthStatText;
+    [SerializeField] private TMP_Text attackStatText;
+    [SerializeField] private TMP_Text defendStatText;
+    [SerializeField] private TMP_Text critStatText;
+
     private void Start()
     {
         HealthUISetUp();
@@ -46,5 +52,13 @@ public class PlayerUI : MonoBehaviour
         expBar.maxValue = Player.instance.MaxPlayerExp;
 
         expBar.value = Player.instance.CurrentPlayerExp;
+    }
+
+    public void StatUISetUp()
+    {
+        healthStatText.text = $"Health = {PlayerStat.instance.GetStat(StatType.Health)}";
+        attackStatText.text = $"Attack = {PlayerStat.instance.GetStat(StatType.Attack)}";
+        defendStatText.text = $"Defense = {PlayerStat.instance.GetStat(StatType.Defense)}";
+        critStatText.text = $"Critical = {PlayerStat.instance.GetStat(StatType.Critical)}";
     }
 }

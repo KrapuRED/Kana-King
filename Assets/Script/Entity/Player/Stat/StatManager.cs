@@ -7,7 +7,8 @@ public enum StatType
     Health,
     Critical,
     Agility,
-    Stamina
+    Stamina,
+    Healing
 }
 
 [System.Serializable]

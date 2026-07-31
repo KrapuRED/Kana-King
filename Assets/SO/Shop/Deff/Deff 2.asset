@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7a08e0c4a98559243bb41e68f6d8c43a, type: 3}
-  m_Name: Attack 1
+  m_Name: Deff 2
   m_EditorClassIdentifier: 
-  statIcon: {fileID: 6383903053851653288, guid: 2225b0fe18536974c80d887d68d8d296, type: 3}
-  statName: Iron Sword
-  statType: 0
-  statDescription: +2 ATK, -55 coin
-  itemPrice: 55
+  statIcon: {fileID: 8220784392801387003, guid: 8dfb9aba4c1e1ff4180f9aac1ef7691d, type: 3}
+  statName: Leather Armor
+  statType: 1
+  statDescription: +3 DEF, -80 coin
+  itemPrice: 80
   modifierType: 0
-  modifierValue: 2
+  modifierValue: 3

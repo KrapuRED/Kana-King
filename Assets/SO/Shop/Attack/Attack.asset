@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Attack
   m_EditorClassIdentifier: 
   statIcon: {fileID: 6383903053851653288, guid: 2225b0fe18536974c80d887d68d8d296, type: 3}
-  statName: Attack
+  statName: Iron Sword
   statType: 0
-  statDescription: attack +2
-  itemPrice: 1
+  statDescription: +1 ATK, -30 coin
+  itemPrice: 30
   modifierType: 0
-  modifierValue: 2
+  modifierValue: 1
