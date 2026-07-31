@@ -56,4 +56,10 @@ public class PlayerMovement : MonoBehaviour
     {
         moveInput = new Vector2(dirX, dirY);
     }
+
+    public void PlayWalkSFX()
+    {
+        AudioManager.instance.PlaySFX(AudioManager.instance.walk);
+    }
+
 }

@@ -101,7 +101,7 @@ public class PlayerAttackMelee : MonoBehaviour
                 }
             }
         }
-
+        AudioManager.instance.PlaySFX(AudioManager.instance.sword);
     }
 
 

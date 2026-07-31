@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: SwordMaster
   characterSprite: {fileID: -1631017502767035647, guid: 85677428737eaff44b08e1fe3888f4c8, type: 3}
-  description: akjsdhjsahdjhsajdhasd
+  description: A fearless warrior who excels in close-range combat.
   baseStatDatas: []
   playerGameObject: {fileID: 0}
