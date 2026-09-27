@@ -24,6 +24,7 @@ Game Engine = Unity 6000.0.60f1
 - Wave System
 - Player Attack Melee
 - Player Interact
+- Crate Gacha
 - Implement Animation Character in Unity, Animation UI Dotween
 
 ## Key Features
