@@ -15,6 +15,17 @@ Game Engine = Unity 6000.0.60f1
 | Jennie Aurellia | Game Designer | ... |
 | Josephine Pardede | Game Designer | ... |
 
+## My Contribution (astranot09)
+- VLCC Logic (How to trigger VLCC, How to get the katakana/hiragana data from database, etc)
+- VLCC Database (Whats it need, How to get the value, etc)
+- Item Pickup (When the item is automate got pick up by player, what happend when got pick up by player, etc)
+- Player Stat (How To Access the stat, and How to calculate the stat into damage, defense, etc)
+- Artefact Logic (How to equip this artefact, What happend when got equip, How to throw away the artefact, etc)
+- Wave System
+- Player Attack Melee
+- Player Interact
+- Implement Animation Character in Unity, Animation UI Dotween
+
 ## Key Features
 
 ### Attack
