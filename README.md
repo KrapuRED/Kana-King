@@ -60,7 +60,7 @@ Player need to do VLCC to open crate and the loot is random with chances.
 
 | Name | Scene | Responsibility |
 | :---: | :---: | :---: |
-| Scene Controller | All Scene | Scene transitions, loading screens, state resets. |
+| Scene Controller | All Scene | Scene transitions, load screens, exit game. |
 | Audio Manager | All Scene | Plays BGM/SFX globally via audio database. |
 | Player Input | Gameplay | Handles input mapping for attacks, movement, and interactions. |
 | Player Interact System | Gameplay | Detects interactive objects in range via IInteractable. |
