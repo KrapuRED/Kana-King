@@ -52,6 +52,9 @@ Player need to do VLCC to open crate and the loot is random with chances.
 
 ## Layer / Module Design
 
+<img width="1842" height="1302" alt="KanaKingLayeModule drawio" src="https://github.com/user-attachments/assets/5a4d27b8-ad27-486c-9574-3af68dba332e" />
+
+
 ## Modules and Features
 
 | Name | Scene | Responsibility |
@@ -72,3 +75,4 @@ Player need to do VLCC to open crate and the loot is random with chances.
 | VLCC UI | Gameplay | Manage how to VLCC will be shown |
 | Item Script | Gameplay | Handles physics magnet attraction toward player via IPickup.|
 ## Game Flow
+<img width="2502" height="1307" alt="KanaKingGameFlow drawio" src="https://github.com/user-attachments/assets/ad9719b5-6232-47ec-ae4f-9d934a664f82" />
