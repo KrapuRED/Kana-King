@@ -54,4 +54,21 @@ Player need to do VLCC to open crate and the loot is random with chances.
 
 ## Modules and Features
 
+| Name | Scene | Responsibility |
+| :---: | :---: | :---: |
+| Scene Controller | All Scene | Scene transitions, loading screens, state resets. |
+| Audio Manager | All Scene | Plays BGM/SFX globally via audio database. |
+| Player Input | Gameplay | Handles input mapping for attacks, movement, and interactions. |
+| Player Interact System | Gameplay | Detects interactive objects in range via IInteractable. |
+| Player Attack Melee | Gameplay | Handles melee collision detection and damage calculation. |
+| Wave Manager | Gameplay | Controls wave progression, enemy difficulty scaling, and wave UI events. |
+| Artefact Manager | Gameplay | Manage if there is new artefact, artefact that player current have, How to trigger if there is a new artefact |
+| Artefact Database | Gameplay | To See all artefact that player can get |
+| Artefact Inventory | Gameplay | Manage UI when player get Artefact |
+| Shop Database | Gameplay | To See all item that player can buy in the shop |
+| Shop Manager | Gameplay | Controls level-up trigger, dynamic shop inventory generation, and currency transactions. |
+| Database VLCC | Gameplay | To See all hiragana/katakana, meaning, romaji that player can get |
+| VLCC Manager | Gameplay | Drives the core learning mechanism, checks answer validation, and communicates success/failure callbacks to external crates/systems.|
+| VLCC UI | Gameplay | Manage how to VLCC will be shown |
+| Item Script | Gameplay | Handles physics magnet attraction toward player via IPickup.|
 ## Game Flow
