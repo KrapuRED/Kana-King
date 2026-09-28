@@ -52,7 +52,8 @@ Player need to do VLCC to open crate and the loot is random with chances.
 
 ## Layer / Module Design
 
-<img width="1842" height="1302" alt="KanaKingLayeModule drawio" src="https://github.com/user-attachments/assets/5a4d27b8-ad27-486c-9574-3af68dba332e" />
+<img width="1842" height="1262" alt="KanaKingLayerModule drawio drawio" src="https://github.com/user-attachments/assets/b3d2db78-3eea-46ad-8525-7a720b2e23a0" />
+
 
 
 ## Modules and Features
