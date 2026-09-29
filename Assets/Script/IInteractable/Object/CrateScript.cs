@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
-
+using DG.Tweening;
 
 public enum CreateReward
 {
@@ -33,6 +33,7 @@ public class CrateScript : MonoBehaviour, IInteractable
     [SerializeField] private int coinDrop;
     [SerializeField] private float expDrop;
 
+    private SpriteRenderer spriteRenderer;
 
 
     private void Awake()
@@ -50,6 +51,8 @@ public class CrateScript : MonoBehaviour, IInteractable
                 Debug.LogWarning($"Player tag not found in scene by {gameObject.name}!");
             }
         }
+
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void OnEnable()
@@ -61,6 +64,15 @@ public class CrateScript : MonoBehaviour, IInteractable
     private void OnDisable()
     {
         canInteract = false;
+    }
+
+    private void Start()
+    {
+        Color color = spriteRenderer.color;
+        color.a = 0f;
+        spriteRenderer.color = color;
+
+        spriteRenderer.DOFade(1f, 0.5f);
     }
 
     public void Interact()

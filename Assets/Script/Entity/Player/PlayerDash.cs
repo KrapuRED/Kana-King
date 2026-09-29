@@ -36,9 +36,9 @@ public class PlayerDash : MonoBehaviour
         }
     }
 
-    public void OnDash(InputAction.CallbackContext context)
+    public void PlayerDashing()
     {
-        if (context.performed && canDash)
+        if (canDash)
         {
             StartCoroutine(Dash());
         }
@@ -52,10 +52,10 @@ public class PlayerDash : MonoBehaviour
         Vector2 dir = dashDirection == Vector2.zero ? lastMoveDirection : dashDirection;
         dir.Normalize();
 
-        // 🔥 kasih dorongan (bukan overwrite terus)
+        //  kasih dorongan (bukan overwrite terus)
         rb.linearVelocity = dir * dashForce;
 
-        // 🔥 bikin cepat berhenti (biar enak feel nya)
+        //  bikin cepat berhenti (biar enak feel nya)
         rb.linearDamping = dashDrag;
 
         yield return new WaitForSeconds(dashDuration);

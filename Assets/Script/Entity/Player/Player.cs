@@ -1,6 +1,7 @@
 using System.Collections;
 using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class Player : MonoBehaviour, IDamageable
 {
@@ -41,6 +42,7 @@ public class Player : MonoBehaviour, IDamageable
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private float delayAnimationDamage = 0.3f;
     [SerializeField] private CinemachineImpulseSource cinemachineImpulseSource;
+    [SerializeField] private Light2D light;
 
     [Header("Healing Artefact")]
     [SerializeField] private float healingAmount = 5f;
@@ -126,9 +128,28 @@ public class Player : MonoBehaviour, IDamageable
 
     IEnumerator TakingDamageAnimation()
     {
-        spriteRenderer.color = Color.red;
-        yield return new WaitForSeconds(delayAnimationDamage);
-        spriteRenderer.color = Color.white;
+        Color damageColor = Color.red;
+        Color normalColor = Color.white;
+        float elapsedTime = 0f;
+
+        spriteRenderer.color = damageColor;
+        light.color = damageColor;
+
+        while (elapsedTime < delayAnimationDamage)
+        {
+            elapsedTime += Time.deltaTime;
+            float t = elapsedTime / delayAnimationDamage; // Mengubah nilai menjadi rentang 0.0 sampai 1.0
+
+            Color currentColor = Color.Lerp(damageColor, normalColor, t);
+
+            spriteRenderer.color = currentColor;
+            light.color = currentColor;
+
+            yield return null; // Tunggu hingga frame berikutnya
+        }
+
+        spriteRenderer.color = normalColor;
+        light.color = normalColor;
     }
 
 

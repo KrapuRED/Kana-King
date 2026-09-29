@@ -4,6 +4,8 @@ using UnityEngine.InputSystem;
 public class PlayerInput : MonoBehaviour
 {
     [SerializeField] private PlayerMovement playerMovement;
+    [SerializeField] private PlayerInteractSystem playerInteract;
+    [SerializeField] private PlayerDash playerDash;
 
     [SerializeField] private GameObject dictionaryPanel;
 
@@ -27,6 +29,22 @@ public class PlayerInput : MonoBehaviour
         if (ctx.started && !PauseSystem.instance.IsPaused)
         {
             dictionaryPanel.SetActive(!dictionaryPanel.activeSelf);
+        }
+    }
+
+    public void OnInteract(InputAction.CallbackContext ctx)
+    {
+        if (ctx.started)
+        {
+            playerInteract.Interact();
+        }
+    }
+
+    public void OnDash(InputAction.CallbackContext ctx)
+    {
+        if (ctx.started)
+        {
+            playerDash.PlayerDashing();
         }
     }
 }

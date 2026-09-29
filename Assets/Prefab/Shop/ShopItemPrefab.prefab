@@ -844,6 +844,7 @@ GameObject:
   - component: {fileID: 7836926973907880826}
   - component: {fileID: 1207332544754832810}
   - component: {fileID: 108482190506087339}
+  - component: {fileID: -1951031163039433393}
   m_Layer: 5
   m_Name: ShopItemPrefab
   m_TagString: Untagged
@@ -931,3 +932,16 @@ MonoBehaviour:
   itemName: {fileID: 8446693835354809054}
   itemType: {fileID: 1615797799131276710}
   itemDescription: {fileID: 7363822076033650791}
+  canvasGroup: {fileID: -1951031163039433393}
+--- !u!225 &-1951031163039433393
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8922486112697277872}
+  m_Enabled: 1
+  m_Alpha: 0.82
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0

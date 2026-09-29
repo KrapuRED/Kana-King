@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Unity.VisualScripting;
+using DG.Tweening;
 
 public class ItemShopPrefab : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class ItemShopPrefab : MonoBehaviour
     [SerializeField] private TMP_Text itemType;
     [SerializeField] private TMP_Text itemDescription;
 
+    [SerializeField] private CanvasGroup canvasGroup;
 
 
     public void SetUp(ShopSO shopSO)
@@ -23,6 +25,8 @@ public class ItemShopPrefab : MonoBehaviour
         itemType.text = itemShop.statType.ToString();
         itemDescription.text = itemShop.statDescription;
         price = itemShop.itemPrice;
+        canvasGroup.DOKill();
+        canvasGroup.DOFade(1f, 1f).SetUpdate(true);
     }
 
     public void Buy()
@@ -30,7 +34,11 @@ public class ItemShopPrefab : MonoBehaviour
         if (!ShopManager.instance.CheckPlayerCurrency(price)) return;
         PlayerStat.instance.RemoveCoin(price);
         ShopManager.instance.BuyItem(itemShop);
-        ShopUI.instance.ShopUISetUp();
-        Destroy(gameObject);
+        canvasGroup.DOKill();
+        canvasGroup.DOFade(0f, 1f).OnComplete(() =>
+        {
+            ShopUI.instance.ShopUISetUp();
+            Destroy(gameObject);
+        }).SetUpdate(true);
     }
 }

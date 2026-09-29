@@ -22,11 +22,8 @@ public class PlayerInteractSystem : MonoBehaviour
         }
     }
 
-    public void Interact(InputAction.CallbackContext ctx)
+    public void Interact()
     {
-        // "started" atau "performed" (tanpa hold) akan langsung memicu kode ini begitu tombol ditekan
-        if (!ctx.performed) return;
-
         if (hitCollider != null)
         {
             IInteractable interactable = hitCollider.GetComponent<IInteractable>();
