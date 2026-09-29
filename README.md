@@ -29,26 +29,24 @@ Game Engine = Unity 6000.0.60f1
 
 ## Key Features
 
-### Attack
-Player can attack enemy using LMB or Button at bottom left screen.
+### Melee Combat: 
+Attack enemies using LMB or the dedicated touch action button
 
-### VLCC
-Player need arrange hiragana or katakana with the correct order. if success player will get item, if failed, the item will be destroyed.
+### Vocabulary Learning Chain Combo (VLCC): 
+Arrange romaji in the correct sequence with katakana under time pressure to unlock crates or acquire items. Failed attempts destroy the loot!
 
-### Shop
-When player level up, shop will be opened, player can buy buff to help improve stats.
+### Level-Up Shop
+Automatically opens a shop upon level-up, allowing players to spend acquired currency on stat buffs.
 
-### Artefact
-When player defeated boss or small chance by opening crate, player will get artefact, it will give good buff to player, to help player kill the enemy.
+### Artefact System
+Defeat bosses or open crates to acquire powerful artefacts that grant passive game-changing modifiers.
 
-### Wave
-Every wave have a lot of enemy and different enemy stat.
+### Dynamic Wave System
+Survive escalating enemy waves with increasing density, unique enemy types, and scaling stat profiles.
 
-### Interact
-Player can interact with iinteractable object using E.
+### Interactive Crate Gacha
+Risk-reward loot chests powered by the VLCC puzzle mechanic.
 
-### Crate
-Player need to do VLCC to open crate and the loot is random with chances.
 
 ## Layer / Module Design
 
