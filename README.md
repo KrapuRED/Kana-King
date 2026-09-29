@@ -21,6 +21,7 @@ Game Engine = Unity 6000.0.60f1
 - Item Pickup (When the item is automate got pick up by player, what happend when got pick up by player, etc)
 - Player Stat (How To Access the stat, and How to calculate the stat into damage, defense, etc)
 - Artefact Logic (How to equip this artefact, What happend when got equip, How to throw away the artefact, etc)
+- Shop System (How to trigger the shop, how to buy, etc) 
 - Wave System
 - Player Attack Melee
 - Player Interact
