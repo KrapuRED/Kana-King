@@ -1,5 +1,9 @@
 # KANA KING
 
+<p><strong>Video Gameplay</strong></p>
+<video src="https://github.com/user-attachments/assets/ff8aa823-21e9-46f7-8e51-ee4f3540d85d" width="320" height="180" autoplay loop muted playsinline></video>
+
+
 ## About Game
 Kana King is an action roguelike game designed as a Japanese language learning medium. Inspired by games like HoloCure and Vampire Survivors, it adopts their fast-paced, repetitive, and challenging gameplay patterns to keep players engaged over long periods. The core mechanics of Kana King center around the Vocabulary Learning Chain Combo (VLCC), where players must correctly input sequences of Hiragana vocabulary to execute various in-game actions, such as opening chests
 
