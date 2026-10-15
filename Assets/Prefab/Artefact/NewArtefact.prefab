@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4117193512433362133}
   - component: {fileID: 2374055013921356379}
   - component: {fileID: 3668941830387613841}
+  - component: {fileID: 5613625658224750731}
   m_Layer: 5
   m_Name: NewArtefact
   m_TagString: Untagged
@@ -147,3 +148,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &5613625658224750731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1757618287267153805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03012ecf9f22cb24ab023df751c1562a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scaleUp: 1.1
+  animDuration: 0.3

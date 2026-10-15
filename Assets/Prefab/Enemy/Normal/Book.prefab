@@ -209,3 +209,4 @@ MonoBehaviour:
   expPrefab: {fileID: 3747922618828737037, guid: 4705a5db55d961242a99578c94291bfd, type: 3}
   testName: katakana
   duration: 7
+  takeDamagePopUp: {fileID: 2241532064078403699, guid: d245ce0292f81c943b5ae25194027f4e, type: 3}

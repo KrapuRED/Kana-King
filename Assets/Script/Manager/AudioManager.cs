@@ -20,6 +20,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip vlccMusic;
     public AudioClip walk;
     public AudioClip sword;
+    public AudioClip enemyDeath;
 
     private void Start()
     {

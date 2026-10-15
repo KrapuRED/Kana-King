@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7297447703272836524}
   - component: {fileID: 6782035634639949428}
   - component: {fileID: 5781618063443146105}
+  - component: {fileID: 4959490200388604176}
   m_Layer: 5
   m_Name: Delete
   m_TagString: Untagged
@@ -132,6 +133,20 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &4959490200388604176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4010000758921346695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03012ecf9f22cb24ab023df751c1562a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scaleUp: 1.1
+  animDuration: 0.3
 --- !u!1 &5572235450626440616
 GameObject:
   m_ObjectHideFlags: 0
@@ -145,6 +160,7 @@ GameObject:
   - component: {fileID: 1477458656669103378}
   - component: {fileID: -8757858070554663786}
   - component: {fileID: 7651389586845803536}
+  - component: {fileID: 477094444033320930}
   m_Layer: 5
   m_Name: ArtefactInventory
   m_TagString: Untagged
@@ -280,3 +296,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &477094444033320930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5572235450626440616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03012ecf9f22cb24ab023df751c1562a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scaleUp: 1.1
+  animDuration: 0.3

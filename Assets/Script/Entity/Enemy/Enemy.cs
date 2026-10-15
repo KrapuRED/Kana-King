@@ -19,6 +19,9 @@ public class Enemy : MonoBehaviour, IDamageable
     [SerializeField] private string testName;
     [SerializeField] private float duration = 7f;
 
+    [Header("DamagePopUp")]
+    [SerializeField] private GameObject takeDamagePopUp;
+
     private int n;
 
     private void Start()
@@ -45,11 +48,20 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         currentHealth -= damage;
         currentHealth = Mathf.Clamp(currentHealth, 0, enemyData.maxHealth);
-
+        InstantiatePopUp(damage);
         if (currentHealth <= 0)
         {
             Die();
         }
+    }
+
+    private void InstantiatePopUp(float damage)
+    {
+        float randomX = Random.Range(-0.15f, 0.15f);
+        Vector3 spawnPosition = transform.position + new Vector3(randomX, 0f, 0f);
+
+        GameObject popUp= Instantiate(takeDamagePopUp, spawnPosition, Quaternion.identity);
+        popUp.GetComponent<PopUpDamagePrefab>().SetUpDamagePopUp(damage);
     }
 
     private void Die()
@@ -60,6 +72,7 @@ public class Enemy : MonoBehaviour, IDamageable
         //GameObject x = Instantiate(expPrefab, transform.position, Quaternion.identity);
         //x.GetComponent<ExpScript>().SetEXPValue(expDrop);
         EnemySpawner.instance.EnemyDeathCount();
+        AudioManager.instance.PlaySFX(AudioManager.instance.enemyDeath);
 
         if(enemyData.enemyType == EnemyType.Boss)
         {

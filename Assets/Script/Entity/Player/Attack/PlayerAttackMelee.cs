@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.Cinemachine;
 using UnityEngine;
 
 public class PlayerAttackMelee : MonoBehaviour
@@ -29,12 +30,15 @@ public class PlayerAttackMelee : MonoBehaviour
     [SerializeField] private float attackCooldown = 0.5f;
     private bool canAttack = true;
 
+    [Header("VFX Settings")]
+    [SerializeField] private GameObject hitVFXPrefab;
+
     [Header("Buff Artefact")]
     public bool healingAttack = false;
     public float healingPercentageFromAttack;
 
     [SerializeField] private Animator animator;
-
+    [SerializeField] private CinemachineImpulseSource impulseSource;
 
     public void Attack()
     {
@@ -84,6 +88,11 @@ public class PlayerAttackMelee : MonoBehaviour
             enemyLayer
         );
 
+        if(enemies.Length > 0)
+        {
+            impulseSource.GenerateImpulse();
+        }
+
         // Damage enemy
         foreach (Collider2D enemy in enemies)
         {
@@ -91,6 +100,19 @@ public class PlayerAttackMelee : MonoBehaviour
 
             if (damageable != null)
             {
+
+                if (hitVFXPrefab != null)
+                {
+                    Debug.Log("Spawn particle");
+                    // Cari titik terdekat pada collider musuh terhadap attackPoint
+                    Vector2 hitPoint = enemy.ClosestPoint(attackPoint.position);
+
+                    // Instantiate Particle di World Space
+                    GameObject vfx = Instantiate(hitVFXPrefab, hitPoint, Quaternion.identity);
+                    Destroy(vfx, 1f);
+
+                }
+
                 float n = AttackCalculation();
                 damageable.TakeDamage(n);
                 if (healingAttack)
