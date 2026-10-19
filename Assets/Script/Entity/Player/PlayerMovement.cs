@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector2 moveInput;
 
+    [SerializeField] private ParticleSystem walkParticle;
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -60,6 +61,7 @@ public class PlayerMovement : MonoBehaviour
     public void PlayWalkSFX()
     {
         AudioManager.instance.PlaySFX(AudioManager.instance.walk);
+        walkParticle.Play();
     }
 
 }
