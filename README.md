@@ -1,7 +1,10 @@
 # KANA KING
 
-<p><strong>Video Gameplay</strong></p>
-<video src="https://github.com/user-attachments/assets/ff8aa823-21e9-46f7-8e51-ee4f3540d85d" width="320" height="180" autoplay loop muted playsinline></video>
+<!-- <p><strong>Video Gameplay</strong></p>
+<video src="https://github.com/user-attachments/assets/ff8aa823-21e9-46f7-8e51-ee4f3540d85d" width="320" height="180" autoplay loop muted playsinline></video> -->
+
+<img width="320" height="180" alt="Timeline 1kana (1)" src="https://github.com/user-attachments/assets/8a22a398-26e3-4329-9d71-c43f43f8b303" />
+<img width="320" height="180" alt="kana2 (1)" src="https://github.com/user-attachments/assets/100d5f72-7e74-4f13-8858-352d1b467921" />
 
 
 ## About Game
