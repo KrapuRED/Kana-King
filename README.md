@@ -35,7 +35,8 @@ Game Engine = Unity 6000.0.60f1
 - Crate Gacha
 - Implement Animation Character in Unity, Animation UI Dotween
 - Player feedback (taking damage)
-
+- Polishing
+  
 ## Key Features
 
 ### Melee Combat: 
